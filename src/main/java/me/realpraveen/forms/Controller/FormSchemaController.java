@@ -30,13 +30,13 @@ public class FormSchemaController {
 	}
 
 	@GetMapping("/{id}")
-	public FormSchema findFromById(@PathVariable String id) {
-		return formSchemaService.findFromById(id);
+	public FormSchema findById(@PathVariable String id) {
+		return formSchemaService.findById(id);
 	}
 
 	@PostMapping
-	public FormSchema insertSchema(@RequestBody FormSchema formSchema) {
-		return formSchemaService.insertSchema(formSchema);
+	public FormSchema insertFormSchema(@RequestBody FormSchema formSchema) {
+		return formSchemaService.insertFormSchema(formSchema);
 	}
 
 }

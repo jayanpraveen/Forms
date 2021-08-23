@@ -17,14 +17,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(value = "FormSchema")
-public class FormSchema {
+@Document(value = "ResponseSchema")
+public class ResponseSchema {
 
 	@Id
-	@Indexed
 	@Setter(value = AccessLevel.PROTECTED)
+	private String id;
+	@Indexed
 	private String formId;
-	private String title;
-	private List<HashMap<String, String>> questions;
+	private List<HashMap<String, String>> response;
 
 }

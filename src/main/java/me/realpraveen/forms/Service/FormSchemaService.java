@@ -22,11 +22,11 @@ public class FormSchemaService {
 		return formSchemaRepository.findAll();
 	}
 
-	public FormSchema findFromById(String id) {
-		return formSchemaRepository.findById(id).orElse(null);
+	public FormSchema findById(String formId) {
+		return formSchemaRepository.findById(formId).orElse(null);
 	}
 
-	public FormSchema insertSchema(FormSchema formSchema) {
+	public FormSchema insertFormSchema(FormSchema formSchema) {
 		return formSchemaRepository.insert(formSchema);
 	}
 
