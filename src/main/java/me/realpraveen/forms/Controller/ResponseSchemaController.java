@@ -36,19 +36,14 @@ public class ResponseSchemaController {
 		return responseSchemaService.findAllResponse();
 	}
 
-	@GetMapping("/{id}")
-	public ResponseSchema findById(@PathVariable String id) {
-		return responseSchemaService.findById(id);
+	@GetMapping("/{formId}")
+	public ResponseDTO getResponse(@PathVariable String formId) {
+		return responseDTOService.buildResponseDTO(formId);
 	}
 
 	@GetMapping("/form/{formId}")
 	public List<ResponseSchema> findByFormId(@PathVariable String formId) {
 		return responseSchemaService.findByFromId(formId);
-	}
-
-	@GetMapping("ans/{id}")
-	public ResponseDTO getResponse(@PathVariable String id) {
-		return responseDTOService.buildResponseDTO(id);
 	}
 
 	@PostMapping

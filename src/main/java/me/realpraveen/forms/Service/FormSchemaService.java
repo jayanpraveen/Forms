@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import me.realpraveen.forms.Model.FormSchema;
 import me.realpraveen.forms.Repository.FormSchemaRepository;
 
 @Service
+@Slf4j
 public class FormSchemaService {
 
 	FormSchemaRepository formSchemaRepository;
@@ -27,6 +29,7 @@ public class FormSchemaService {
 	}
 
 	public FormSchema insertFormSchema(FormSchema formSchema) {
+		log.info(formSchema.toString());
 		return formSchemaRepository.insert(formSchema);
 	}
 

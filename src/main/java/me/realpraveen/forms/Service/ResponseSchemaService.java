@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import me.realpraveen.forms.Model.ResponseSchema;
 import me.realpraveen.forms.Repository.ResponseSchemaRepository;
 
 @Service
+@Slf4j
 public class ResponseSchemaService {
 
 	ResponseSchemaRepository responseSchemaRepository;
@@ -31,6 +33,7 @@ public class ResponseSchemaService {
 	}
 
 	public ResponseSchema insertResponseSchema(ResponseSchema responseSchema) {
+		log.info(responseSchema.toString());
 		return responseSchemaRepository.insert(responseSchema);
 	}
 

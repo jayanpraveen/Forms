@@ -23,10 +23,11 @@ public class ResponseDTOService {
 		this.responseRepository = responseRepository;
 	}
 
-	public ResponseDTO buildResponseDTO(String id) {
-		var title = formRepository.findById(id).orElse(null).getTitle();
-		var questions = formRepository.findById(id).orElse(null).getQuestions();
-		var responses = responseRepository.findByFormId(id).stream().map(ResponseSchema::getResponse)
+	public ResponseDTO buildResponseDTO(String formId) {
+		var form = formRepository.findById(formId).orElse(null);
+		var title = form.getTitle();
+		var questions = form.getQuestions();
+		var responses = responseRepository.findByFormId(formId).stream().map(ResponseSchema::getResponse)
 				.collect(Collectors.toList());
 
 		return ResponseDTO.builder().title(title).questions(questions).response(responses).build();
