@@ -1,13 +1,19 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { cardBody, cardHead, cardStyle, listStyle } from "./FormStyle";
+import {
+  cardBody,
+  cardHead,
+  cardStyle,
+  listStyle,
+  headerStripeStyle,
+} from "./Styles/FormStyle";
 import { Card, Typography, Button, Input, List, Form, Space } from "antd";
 const { TextArea } = Input;
 
 export default function FromList() {
   const [APIData, setAPIData] = useState([{ response: [] }]);
   const [Loading, setLoading] = useState(true);
-  const formId = "";
+  const formId = "6126c7d07409fe19e3fc4480";
   const url = `http://localhost:8080/form/${formId}`;
 
   useEffect(() => {
@@ -21,23 +27,11 @@ export default function FromList() {
 
   const onFinish = (values) => console.log(values);
 
-  const headerStripeStyle = {
-    color: "#fff",
-    backgroundColor: "#6739B7",
-    borderTopLeftRadius: "8px",
-    borderTopRightRadius: "10px",
-    height: "10px",
-    position: "absolute",
-    left: "-1px",
-    top: "-1px",
-    // * fix width
-    width: "540px",
-  };
   /**
    * TODO: make buttons, card width, height resposnive and cleaner css, componenets
    */
   return (
-    <div style={{ background: "#F0EBF8" }}>
+    <div style={{ background: "#F0EBF8", fontFamily: "Nunito Sans" }}>
       <div style={listStyle}>
         <Card style={cardStyle} title={<h2>{APIData.title}</h2>}>
           <div style={headerStripeStyle}></div>
@@ -51,7 +45,7 @@ export default function FromList() {
             dataSource={APIData.questions}
             renderItem={(item) => (
               <Form.Item name={item.id} style={{ margin: "10px" }}>
-                <List.Item style={{ padding: "0px 0px 0px 0px" }}>
+                <List.Item style={{ padding: "0px" }}>
                   <Card
                     headStyle={cardHead}
                     bodyStyle={cardBody}

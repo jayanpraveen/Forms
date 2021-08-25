@@ -21,4 +21,17 @@ const cardHead = {
   whiteSpace: "pre-line",
 };
 
-export { cardBody, cardHead, cardStyle, listStyle };
+const headerStripeStyle = {
+  color: "#fff",
+  backgroundColor: "#6739B7",
+  borderTopLeftRadius: "8px",
+  borderTopRightRadius: "10px",
+  height: "10px",
+  position: "absolute",
+  left: "-1px",
+  top: "-1px",
+  // * fix width
+  width: "540px",
+};
+
+export { cardBody, cardHead, cardStyle, listStyle, headerStripeStyle };
