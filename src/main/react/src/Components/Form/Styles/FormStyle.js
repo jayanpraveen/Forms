@@ -11,14 +11,14 @@ const cardStyle = {
   margin: "0px",
 };
 
-const listStyle = {
-  display: "flex",
-  justifyContent: "center",
-};
-
 const cardBody = {};
 const cardHead = {
   whiteSpace: "pre-line",
+};
+
+const listStyle = {
+  display: "flex",
+  justifyContent: "center",
 };
 
 const headerStripeStyle = {
@@ -34,4 +34,18 @@ const headerStripeStyle = {
   width: "540px",
 };
 
-export { cardBody, cardHead, cardStyle, listStyle, headerStripeStyle };
+const submitStyle = {
+  borderRadius: "5px",
+  paddingBottom: "2px",
+  paddingLeft: "22px",
+  paddingRight: "22px",
+};
+
+export {
+  cardBody,
+  cardHead,
+  cardStyle,
+  listStyle,
+  headerStripeStyle,
+  submitStyle,
+};

@@ -1,4 +1,4 @@
-import FromList from "./Component/Form/FromList";
+import FromList from "./Components/Form/FromList";
 
 function App() {
   /**
