@@ -33,7 +33,8 @@ public class ResponseSchemaService {
 	}
 
 	public ResponseSchema insertResponseSchema(ResponseSchema responseSchema) {
-		log.info(responseSchema.toString());
+		;
+		log.info(responseSchema.getResponse().toString());
 		return responseSchemaRepository.insert(responseSchema);
 	}
 

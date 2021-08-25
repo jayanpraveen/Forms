@@ -16,16 +16,16 @@ import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(value = "ResponseSchema")
-@ToString
 public class ResponseSchema {
 
 	@Id
+	@Indexed
 	@Setter(value = AccessLevel.PROTECTED)
 	private String id;
-	@Indexed
 	private String formId;
 	private List<HashMap<String, String>> response;
 

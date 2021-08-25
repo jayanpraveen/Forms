@@ -1,13 +1,9 @@
-import FormSchema from "./Component/FormSchema";
-import ResponseSchema from "./Component/ResponseSchema";
+import FromList from "./Component/FromList";
 
 function App() {
   return (
     <div>
-      <h1>From</h1>
-      <FormSchema formId="" />
-      <h1>Reponse</h1>
-      <ResponseSchema formId="" />
+      <FromList />
     </div>
   );
 }

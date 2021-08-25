@@ -2,7 +2,10 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 export default function ResponseSchema({ formId }) {
-  const [ResponseData, setResponseData] = useState({});
+  const [ResponseData, setResponseData] = useState({
+    questions: [],
+    response: [[]],
+  });
 
   useEffect(() => {
     const fetchData = async () => {
