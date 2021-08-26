@@ -1,5 +1,15 @@
 import React from "react";
+import { Button } from "antd";
+import { submitStyle } from "../Styles/FormStyle";
 
 export default function SubmitButton() {
-  return <div></div>;
+  return (
+    <>
+      <div style={{ padding: "0px", paddingLeft: "15px" }}>
+        <Button style={submitStyle} type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </div>
+    </>
+  );
 }
