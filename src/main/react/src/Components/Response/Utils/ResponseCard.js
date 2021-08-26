@@ -1,6 +1,6 @@
 import { Card, Form, Input, List } from "antd";
 import React from "react";
-import { cardBody, cardHead, cardStyle } from "../Styles/FormStyle";
+import { cardBody, cardHead, cardStyle } from "../Styles/ReponseStyle";
 const { TextArea } = Input;
 
 export default function FormCard({ APIData }) {

@@ -1,4 +1,5 @@
-import FromList from "./Components/Form/FromList";
+import ResponseSchema from "./Components/Response/ResponseSchema";
+import CreateForm from "./Components/Form/CreateForm";
 
 function App() {
   /**
@@ -8,7 +9,8 @@ function App() {
    */
   return (
     <div style={{ fontFamily: "Nunito Sans" }}>
-      <FromList />
+      <CreateForm />
+      {/* <ResponseSchema /> */}
     </div>
   );
 }

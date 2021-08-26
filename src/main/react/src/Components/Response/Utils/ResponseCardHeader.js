@@ -1,6 +1,10 @@
 import React from "react";
 import { Card } from "antd";
-import { listStyle, cardStyle, headerStripeStyle } from "../Styles/FormStyle";
+import {
+  listStyle,
+  cardStyle,
+  headerStripeStyle,
+} from "../Styles/ReponseStyle";
 
 export default function FormCardHeader({ title, about }) {
   return (
