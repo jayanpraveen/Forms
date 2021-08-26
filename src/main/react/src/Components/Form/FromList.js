@@ -1,4 +1,4 @@
-import { Form, List, Space } from "antd";
+import { Form, Space } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { listStyle } from "./Styles/FormStyle";
@@ -24,14 +24,12 @@ export default function FromList() {
   const onFinish = (values) => console.log(values);
 
   /**
-   * TODO: make buttons, card width, height resposnive and cleaner css, componenets
+   * TODO: make card width, height resposnive
    */
-
-  const about = "spring boot and react";
 
   return (
     <>
-      <FormCardHeader title={APIData.title} about={about} />
+      <FormCardHeader title={APIData.title} />
       <Form onFinish={onFinish} style={listStyle}>
         <Space direction="vertical">
           <FormCards APIData={APIData} />
