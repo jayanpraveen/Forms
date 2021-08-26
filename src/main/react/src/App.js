@@ -10,7 +10,6 @@ function App() {
   return (
     <div style={{ fontFamily: "Nunito Sans" }}>
       <CreateForm />
-      {/* <ResponseSchema /> */}
     </div>
   );
 }

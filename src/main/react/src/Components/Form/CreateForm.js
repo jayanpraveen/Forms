@@ -1,6 +1,9 @@
 import React from "react";
-import { Button, Form, Input, Space, Card } from "antd";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { Card, Form, Input, Space } from "antd";
+import { MinusCircleTwoTone } from "@ant-design/icons";
+import AddButton from "./Utils/AddButton";
+import SubmitButton from "./Utils/SubmitButton";
+import TitleField from "./Utils/TitleField";
 import {
   cardBody,
   cardHead,
@@ -8,38 +11,8 @@ import {
   listStyle,
 } from "../Response/Styles/ReponseStyle";
 
-// TODO: break into components
-
 export default function CreateForm() {
-  const onFinish = (data) => console.log(data);
-
-  const SubmitButton = () => (
-    <Button type="danger" htmlType="submit" block>
-      Submit
-    </Button>
-  );
-
-  const Title = () => (
-    <div style={{ textAlign: "center" }}>
-      <h1>Enter title</h1>
-      <Form.Item name="title">
-        <Input />
-      </Form.Item>
-    </div>
-  );
-
-  const AddButton = ({ add }) => (
-    <>
-      <Button
-        type="primary"
-        onClick={() => add()}
-        block
-        icon={<PlusOutlined />}
-      >
-        Add fields
-      </Button>
-    </>
-  );
+  const onFinish = (value) => console.log(value);
 
   const Fun = () => (
     <>
@@ -59,12 +32,19 @@ export default function CreateForm() {
                       bodyStyle={cardBody}
                       style={cardStyle}
                       size="small"
-                      title={<Input />}
+                      title={<Input placeholder="input goes here..." />}
                     >
                       <Input disabled />
                     </Card>
                   </Form.Item>
-                  <MinusCircleOutlined onClick={() => remove(name)} />
+                  <MinusCircleTwoTone
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      fontSize: "20px",
+                    }}
+                    onClick={() => remove(name)}
+                  />
                 </Space>
               </div>
             ))}
@@ -80,7 +60,7 @@ export default function CreateForm() {
   return (
     <>
       <Form name="dync_form" onFinish={onFinish}>
-        <Title />
+        <TitleField />
         <Fun />
         <Form.Item>
           <SubmitButton />
