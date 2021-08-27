@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { listStyle } from "../Styles/ComponentStyle";
 import SubmitButton from "../Utils/SubmitButton";
 import ReponseField from "./Utils/ResponseField";
-import ResponseTitleField from "./Utils/ResponseTitleField";
+import ResponseTitleField from "../Utils/ResponseTitleField";
 
 export default function ResponseSchema() {
   const [APIData, setAPIData] = useState([{ response: [] }]);
@@ -33,7 +33,7 @@ export default function ResponseSchema() {
       <Form onFinish={onFinish} style={listStyle}>
         <Space direction="vertical">
           <ReponseField APIData={APIData} />
-          <SubmitButton />
+          <SubmitButton value={"Submit"} />
         </Space>
       </Form>
     </>
