@@ -1,10 +1,10 @@
 import { Form, Space } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { listStyle } from "./Styles/ReponseStyle";
-import FormCardHeader from "./Utils/ResponseCardHeader";
-import FormCards from "./Utils/ResponseCard";
+import { listStyle } from "../Styles/ComponentStyle";
 import SubmitButton from "./Utils/SubmitButton";
+import ReponseField from "./Utils/ResponseField";
+import ResponseTitleField from "./Utils/ResponseTitleField";
 
 export default function ResponseSchema() {
   const [APIData, setAPIData] = useState([{ response: [] }]);
@@ -24,15 +24,15 @@ export default function ResponseSchema() {
   const onFinish = (values) => console.log(values);
 
   /**
-   * TODO: make card width, height resposnive
+   * TODO: make card width, FormList resposnive
    */
 
   return (
     <>
-      <FormCardHeader title={APIData.title} />
+      <ResponseTitleField title={APIData.title} />
       <Form onFinish={onFinish} style={listStyle}>
         <Space direction="vertical">
-          <FormCards APIData={APIData} />
+          <ReponseField APIData={APIData} />
           <SubmitButton />
         </Space>
       </Form>

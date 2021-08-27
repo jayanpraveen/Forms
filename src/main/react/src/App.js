@@ -8,8 +8,9 @@ function App() {
    * 2. add options for select, long/short response
    */
   return (
-    <div style={{ fontFamily: "Nunito Sans" }}>
+    <div>
       <CreateForm />
+      <ResponseSchema />
     </div>
   );
 }

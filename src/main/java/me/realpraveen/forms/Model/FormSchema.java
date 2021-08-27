@@ -27,6 +27,7 @@ public class FormSchema {
 	@Setter(value = AccessLevel.PROTECTED)
 	private String formId;
 	private String title;
+	private String about;
 	private List<HashMap<String, String>> questions;
 
 }

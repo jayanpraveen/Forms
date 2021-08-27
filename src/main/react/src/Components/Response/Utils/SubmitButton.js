@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "antd";
-import { submitStyle } from "../../Response/Styles/ReponseStyle";
+import { submitStyle } from "../../Styles/ComponentStyle";
 
 export default function SubmitButton() {
   return (

@@ -4,9 +4,9 @@ import {
   listStyle,
   cardStyle,
   headerStripeStyle,
-} from "../Styles/ReponseStyle";
+} from "../../Styles/ComponentStyle";
 
-export default function FormCardHeader({ title, about }) {
+export default function ResponseTitleField({ title, about }) {
   return (
     <>
       <div style={listStyle}>
