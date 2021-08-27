@@ -1,6 +1,7 @@
 import React from "react";
+import axios from "axios";
 import "./css/SiteHeader.css";
-import { Form, Space, Input, PageHeader, Card } from "antd";
+import { Form, Space, Input } from "antd";
 import { listStyle } from "../Styles/ComponentStyle";
 import SubmitButton from "../Utils/SubmitButton";
 import FormField from "./Utils/FormField";
@@ -9,8 +10,29 @@ import SiteHeader from "./Utils/SiteHeader";
 const { TextArea } = Input;
 
 export default function CreateForm() {
-  const onFinish = (value) => console.log(value);
+  const onFinish = (data) => {
+    let payload = {
+      title: data.title,
+      about: data.about,
+      questions: {},
+    };
 
+    for (let i = 0; i < data.questions.length; i++) {
+      let uid = Math.random().toString(36).substring(7);
+      payload.questions[uid] = data.questions[i];
+    }
+
+    console.log(payload);
+
+    axios.post("/form", data).then(
+      (response) => {
+        console.log(response.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
   const Title = () => {
     return (
       <Form.Item name="title">

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import CreateForm from "./CreateForm";
 
 export default function FormSchema({ formId }) {
   const [FormData, setFormData] = useState({});
@@ -19,7 +20,9 @@ export default function FormSchema({ formId }) {
       {Loading ? (
         <h2>Loading...</h2>
       ) : (
-        <pre>{JSON.stringify(FormData, null, 2)}</pre>
+        <div>
+          <CreateForm />
+        </div>
       )}
     </div>
   );

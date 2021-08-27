@@ -1,5 +1,5 @@
 import ResponseSchema from "./Components/Response/ResponseSchema";
-import CreateForm from "./Components/Form/CreateForm";
+import FormSchema from "./Components/Form/FormSchema";
 
 function App() {
   /**
@@ -10,7 +10,7 @@ function App() {
    */
   return (
     <div>
-      <CreateForm />
+      <FormSchema />
       {/* <ResponseSchema /> */}
     </div>
   );

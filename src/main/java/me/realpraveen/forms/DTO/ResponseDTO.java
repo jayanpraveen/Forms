@@ -13,7 +13,7 @@ import lombok.Setter;
 public class ResponseDTO {
 
 	private String title;
-	private List<HashMap<String, String>> questions;
+	private HashMap<String, String> questions;
 	private List<List<HashMap<String, String>>> response;
 
 }

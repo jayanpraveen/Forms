@@ -18,13 +18,13 @@ export default function FormField() {
           <div>
             {fields.map(({ key, name, fieldKey, ...restField }) => (
               <div key={key}>
-                <Form.Item
-                  {...restField}
-                  name={[name, "value"]}
-                  fieldKey={[fieldKey, "value"]}
-                  style={{ margin: "10px" }}
-                >
-                  <List.Item style={{ padding: "0px" }}>
+                <List.Item style={{ padding: "0px" }}>
+                  <Form.Item
+                    {...restField}
+                    name={name}
+                    fieldKey={[fieldKey, "value"]}
+                    style={{ margin: "10px" }}
+                  >
                     <Card
                       headStyle={cardHead}
                       bodyStyle={cardBody}
@@ -47,8 +47,8 @@ export default function FormField() {
                         />
                       </span>
                     </Card>
-                  </List.Item>
-                </Form.Item>
+                  </Form.Item>
+                </List.Item>
               </div>
             ))}
             <Form.Item>

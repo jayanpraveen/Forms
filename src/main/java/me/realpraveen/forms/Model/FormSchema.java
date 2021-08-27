@@ -1,7 +1,6 @@
 package me.realpraveen.forms.Model;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -28,6 +27,6 @@ public class FormSchema {
 	private String formId;
 	private String title;
 	private String about;
-	private List<HashMap<String, String>> questions;
+	private HashMap<String, String> questions;
 
 }
