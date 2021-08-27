@@ -2,7 +2,7 @@ import { Form, Space } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { listStyle } from "../Styles/ComponentStyle";
-import SubmitButton from "./Utils/SubmitButton";
+import SubmitButton from "../Utils/SubmitButton";
 import ReponseField from "./Utils/ResponseField";
 import ResponseTitleField from "./Utils/ResponseTitleField";
 

@@ -1,20 +1,21 @@
+import { Form, Space } from "antd";
 import React from "react";
-import { Card, Form, Input, Space } from "antd";
-import SubmitButton from "./Utils/SubmitButton";
-import TitleField from "./Utils/TitleField";
+import { listStyle } from "../Styles/ComponentStyle";
+import SubmitButton from "../Utils/SubmitButton";
 import FormField from "./Utils/FormField";
+import TitleField from "./Utils/TitleField";
 
 export default function CreateForm() {
   const onFinish = (value) => console.log(value);
 
   return (
     <>
-      <Form name="dync_form" onFinish={onFinish}>
-        <TitleField />
-        <FormField />
-        <Form.Item>
+      <Form style={listStyle} name="dync_form" onFinish={onFinish}>
+        <Space direction="vertical">
+          <TitleField />
+          <FormField />
           <SubmitButton />
-        </Form.Item>
+        </Space>
       </Form>
     </>
   );

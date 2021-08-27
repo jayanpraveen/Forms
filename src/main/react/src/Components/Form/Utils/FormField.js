@@ -1,18 +1,12 @@
+import { DeleteTwoTone } from "@ant-design/icons";
+import { Card, Form, Input, List } from "antd";
 import React from "react";
-import { Space, Form, Card, Input, List } from "antd";
-import { MinusCircleTwoTone } from "@ant-design/icons";
+import { cardBody, cardHead, cardStyle } from "../../Styles/ComponentStyle";
 import AddButton from "./AddButton";
-import {
-  cardBody,
-  cardHead,
-  cardStyle,
-  listStyle,
-} from "../../Styles/ComponentStyle";
 import FormHeaderField from "./FormHeaderField";
 
-const MinusCircleStyle = {
-  display: "flex",
-  justifyContent: "center",
+const deleteIconStyle = {
+  marginTop: "20px",
   fontSize: "20px",
 };
 
@@ -23,12 +17,12 @@ export default function FormField() {
         {(fields, { add, remove }) => (
           <div>
             {fields.map(({ key, name, fieldKey, ...restField }) => (
-              <div key={key} style={listStyle}>
+              <div key={key}>
                 <Form.Item
                   {...restField}
                   name={[name, "value"]}
                   fieldKey={[fieldKey, "value"]}
-                  style={{ margin: "7px" }}
+                  style={{ margin: "10px" }}
                 >
                   <List.Item style={{ padding: "0px" }}>
                     <Card
@@ -39,13 +33,18 @@ export default function FormField() {
                       title={<FormHeaderField />}
                     >
                       <Input placeholder="response goes here" disabled />
+                      <span
+                        style={{ display: "flex", justifyContent: "flex-end" }}
+                      >
+                        <DeleteTwoTone
+                          style={deleteIconStyle}
+                          twoToneColor="crimson"
+                          onClick={() => remove(name)}
+                        />
+                      </span>
                     </Card>
                   </List.Item>
                 </Form.Item>
-                <MinusCircleTwoTone
-                  style={MinusCircleStyle}
-                  onClick={() => remove(name)}
-                />
               </div>
             ))}
             <Form.Item>
