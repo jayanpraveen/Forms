@@ -32,7 +32,11 @@ export default function FormField() {
                       size="small"
                       title={<FormHeaderField />}
                     >
-                      <Input placeholder="response goes here" disabled />
+                      <Input
+                        bordered={false}
+                        placeholder="response goes here"
+                        disabled
+                      />
                       <span
                         style={{ display: "flex", justifyContent: "flex-end" }}
                       >

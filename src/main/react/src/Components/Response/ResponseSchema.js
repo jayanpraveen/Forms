@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { listStyle } from "../Styles/ComponentStyle";
 import SubmitButton from "../Utils/SubmitButton";
 import ReponseField from "./Utils/ResponseField";
-import ResponseTitleField from "../Utils/ResponseTitleField";
+import TitleField from "../Utils/TitleField";
 
 export default function ResponseSchema() {
   const [APIData, setAPIData] = useState([{ response: [] }]);
@@ -23,13 +23,9 @@ export default function ResponseSchema() {
 
   const onFinish = (values) => console.log(values);
 
-  /**
-   * TODO: make card width, FormList resposnive
-   */
-
   return (
     <>
-      <ResponseTitleField title={APIData.title} />
+      <TitleField title={<h2>{APIData.title}</h2>} />
       <Form onFinish={onFinish} style={listStyle}>
         <Space direction="vertical">
           <ReponseField APIData={APIData} />
