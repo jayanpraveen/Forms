@@ -13,7 +13,11 @@ export default function TitleField({ title, about }) {
         style={cardStyle}
         headStyle={{ padding: "12px" }}
         bodyStyle={{ padding: "12px" }}
-        title={title}
+        title={
+          <h2>
+            <div style={{ whiteSpace: "pre-line" }}>{title}</div>
+          </h2>
+        }
       >
         <div style={headerStripeStyle}></div>
         <div>{about}</div>

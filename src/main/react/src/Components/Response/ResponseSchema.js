@@ -1,4 +1,4 @@
-import { Form, Space } from "antd";
+import { Form, Space, Card } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { listStyle } from "../Styles/ComponentStyle";
@@ -23,9 +23,12 @@ export default function ResponseSchema() {
 
   const onFinish = (values) => console.log(values);
 
+  const str =
+    "Bruce learns the art of fighting to confront injustice. When he returns to Gotham as Batman, he must stop a secret society that intends to destroy the city.";
+
   return (
     <>
-      <TitleField title={<h2>{APIData.title}</h2>} />
+      <TitleField title={str} about={str} />
       <Form onFinish={onFinish} style={listStyle}>
         <Space direction="vertical">
           <ReponseField APIData={APIData} />

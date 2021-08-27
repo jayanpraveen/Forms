@@ -4,13 +4,14 @@ import CreateForm from "./Components/Form/CreateForm";
 function App() {
   /**
    * TODO:
-   * 1. add /view, /edit, /create, /viewresponse
+   * 1. add routing /view, /edit, /create, /viewresponse
    * 2. add options for select, long/short response
+   * 3.
    */
   return (
     <div>
       <CreateForm />
-      <ResponseSchema />
+      {/* <ResponseSchema /> */}
     </div>
   );
 }
