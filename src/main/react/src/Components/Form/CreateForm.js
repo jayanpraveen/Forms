@@ -18,8 +18,7 @@ export default function CreateForm() {
     };
 
     for (let i = 0; i < data.questions.length; i++) {
-      let uid = Math.random().toString(36).substring(7);
-      payload.questions[uid] = data.questions[i];
+      payload.questions[i] = data.questions[i];
     }
 
     console.log(payload);

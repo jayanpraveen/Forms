@@ -1,6 +1,7 @@
 package me.realpraveen.forms.DTO;
 
 import java.util.List;
+import java.util.Map;
 import java.util.HashMap;
 
 import lombok.Builder;
@@ -13,7 +14,7 @@ import lombok.Setter;
 public class ResponseDTO {
 
 	private String title;
-	private HashMap<String, String> questions;
+	private Map<String, String> questions;
 	private List<List<HashMap<String, String>>> response;
 
 }
