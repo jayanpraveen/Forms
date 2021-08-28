@@ -13,6 +13,7 @@ const cardStyle = {
 
 const cardBody = {};
 const cardHead = {
+  paddingLeft: "20px",
   whiteSpace: "pre-line",
 };
 

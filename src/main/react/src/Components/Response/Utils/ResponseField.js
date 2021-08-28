@@ -4,13 +4,15 @@ import { cardBody, cardHead, cardStyle } from "../../Styles/ComponentStyle";
 const { TextArea } = Input;
 
 export default function ResponseField({ APIData }) {
+  const questions = APIData.questions;
+  const keyArray = Object.keys(APIData.questions);
   return (
     <div>
       <List
         bordered={false}
-        dataSource={APIData.questions}
+        dataSource={keyArray}
         renderItem={(item) => (
-          <Form.Item name={item.id} style={{ margin: "10px" }}>
+          <Form.Item name={item} style={{ margin: "10px" }}>
             <List.Item style={{ padding: "0px" }}>
               <Card
                 headStyle={cardHead}
@@ -18,7 +20,9 @@ export default function ResponseField({ APIData }) {
                 style={cardStyle}
                 size="small"
                 title={
-                  <div style={{ whiteSpace: "pre-line" }}>{item.value}</div>
+                  <div style={{ whiteSpace: "pre-line" }}>
+                    {questions[item]}
+                  </div>
                 }
               >
                 <TextArea

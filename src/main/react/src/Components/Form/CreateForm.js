@@ -24,7 +24,7 @@ export default function CreateForm() {
 
     console.log(payload);
 
-    axios.post("/form", data).then(
+    axios.post("/form", payload).then(
       (response) => {
         console.log(response.data);
       },

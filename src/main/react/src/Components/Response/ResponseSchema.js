@@ -1,15 +1,15 @@
-import { Form, Space, Card } from "antd";
+import { Form, Space } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { listStyle } from "../Styles/ComponentStyle";
 import SubmitButton from "../Utils/SubmitButton";
-import ReponseField from "./Utils/ResponseField";
 import TitleField from "../Utils/TitleField";
+import ReponseField from "./Utils/ResponseField";
 
 export default function ResponseSchema() {
-  const [APIData, setAPIData] = useState([{ response: [] }]);
+  const [APIData, setAPIData] = useState({ questions: {} });
   const [Loading, setLoading] = useState(true);
-  const formId = "6126ec3c9962d125f7a27a68";
+  const formId = "6128ebd4a8863835d205a35a";
   const url = `http://localhost:8080/form/${formId}`;
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function ResponseSchema() {
 
   return (
     <>
-      <TitleField title={str} about={str} />
+      <TitleField title={APIData.title} about={APIData.about} />
       <Form onFinish={onFinish} style={listStyle}>
         <Space direction="vertical">
           <ReponseField APIData={APIData} />

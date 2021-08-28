@@ -10,8 +10,8 @@ function App() {
    */
   return (
     <div>
-      <FormSchema />
-      {/* <ResponseSchema /> */}
+      {/* <FormSchema /> */}
+      <ResponseSchema />
     </div>
   );
 }
