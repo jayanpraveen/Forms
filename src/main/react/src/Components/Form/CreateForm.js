@@ -35,10 +35,21 @@ export default function CreateForm() {
       }
     );
   };
+  const [form] = Form.useForm();
+
+  const onChange = (e) => {
+    if (e.target.value === "") {
+      message.warning("Title cannot be empty");
+      form.setFieldsValue({
+        title: "Untitled Form",
+      });
+    }
+  };
   const Title = () => {
     return (
       <Form.Item name="title">
         <Input
+          onBlur={onChange}
           bordered={false}
           style={{ fontSize: "28px" }}
           placeholder="Form title"
@@ -58,12 +69,24 @@ export default function CreateForm() {
     );
   };
 
+  const initialValues = {
+    title: "Untitled Form",
+    about: "",
+    questions: [""],
+  };
+
   return (
     <>
       <div className="site-page-wrapper">
         <SiteHeader title="batman begins" subTitle="the movie" />
       </div>
-      <Form style={listStyle} name="dync_form" onFinish={onFinish}>
+      <Form
+        form={form}
+        style={listStyle}
+        name="dync_form"
+        onFinish={onFinish}
+        initialValues={initialValues}
+      >
         <Space direction="vertical">
           <TitleField title={<Title />} about={<About />} />
           <FormField />

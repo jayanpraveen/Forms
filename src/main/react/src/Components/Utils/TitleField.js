@@ -1,9 +1,9 @@
-import React from "react";
 import { Card } from "antd";
+import React from "react";
 import {
-  listStyle,
   cardStyle,
   headerStripeStyle,
+  listStyle,
 } from "../Styles/ComponentStyle";
 
 export default function TitleField({ title, about }) {
