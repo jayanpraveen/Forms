@@ -1,6 +1,7 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import CreateForm from "./CreateForm";
+import LoadingButton from "../Utils/LoadingButton";
 
 export default function FormSchema({ formId }) {
   const [FormData, setFormData] = useState({});
@@ -18,7 +19,7 @@ export default function FormSchema({ formId }) {
   return (
     <div>
       {Loading ? (
-        <h2>Loading...</h2>
+        <LoadingButton />
       ) : (
         <div>
           <CreateForm />

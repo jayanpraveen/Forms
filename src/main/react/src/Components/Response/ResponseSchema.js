@@ -5,11 +5,12 @@ import { listStyle } from "../Styles/ComponentStyle";
 import SubmitButton from "../Utils/SubmitButton";
 import TitleField from "../Utils/TitleField";
 import ReponseField from "./Utils/ResponseField";
+import LoadingButton from "../Utils/LoadingButton";
 
 export default function ResponseSchema() {
   const [APIData, setAPIData] = useState({ questions: {} });
   const [Loading, setLoading] = useState(true);
-  const formId = "";
+  const formId = "6129e069632b774fa558eb30";
   const url = `http://localhost:8080/form/${formId}`;
 
   useEffect(() => {
@@ -34,5 +35,5 @@ export default function ResponseSchema() {
       </Form>
     </div>
   );
-  return <>{Loading ? "Loading..." : <Comp APIData={APIData} />}</>;
+  return <>{Loading ? <LoadingButton /> : <Comp APIData={APIData} />}</>;
 }

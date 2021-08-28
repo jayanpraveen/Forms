@@ -1,7 +1,8 @@
 import React from "react";
 import axios from "axios";
 import "./css/SiteHeader.css";
-import { Form, Space, Input } from "antd";
+import { Form, Space, Input, message } from "antd";
+
 import { listStyle } from "../Styles/ComponentStyle";
 import SubmitButton from "../Utils/SubmitButton";
 import FormField from "./Utils/FormField";
@@ -26,9 +27,11 @@ export default function CreateForm() {
     axios.post("/form", payload).then(
       (response) => {
         console.log(response.data);
+        message.success("Saved successfully!");
       },
       (error) => {
         console.log(error);
+        message.error("Something wrong, try again");
       }
     );
   };
