@@ -2,6 +2,8 @@ package me.realpraveen.forms.Service;
 
 import java.util.List;
 
+import com.mongodb.client.result.UpdateResult;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +34,13 @@ public class ResponseSchemaService {
 		return responseSchemaRepository.findAll();
 	}
 
-	public ResponseSchema insertResponseSchema(ResponseSchema responseSchema) {
-		;
-		log.info(responseSchema.getResponse().toString());
-		return responseSchemaRepository.insert(responseSchema);
+	public ResponseSchema insertResponseSchema(ResponseSchema response) {
+		log.info(response.getResponse().toString());
+		return responseSchemaRepository.insert(response);
+	}
+
+	public UpdateResult pushReponse(ResponseSchema response) {
+		return responseSchemaRepository.pushResponse(response);
 	}
 
 }

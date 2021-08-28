@@ -2,11 +2,14 @@ package me.realpraveen.forms.Controller;
 
 import java.util.List;
 
+import com.mongodb.client.result.UpdateResult;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,9 +50,13 @@ public class ResponseSchemaController {
 	}
 
 	@PostMapping
-	public ResponseSchema insertResponseSchema(@RequestBody ResponseSchema responseSchema) {
-		return responseSchemaService.insertResponseSchema(responseSchema);
+	public ResponseSchema insertResponseSchema(@RequestBody ResponseSchema response) {
+		return responseSchemaService.insertResponseSchema(response);
+	}
 
+	@PutMapping
+	public UpdateResult pushReponse(@RequestBody ResponseSchema response) {
+		return responseSchemaService.pushReponse(response);
 	}
 
 }
