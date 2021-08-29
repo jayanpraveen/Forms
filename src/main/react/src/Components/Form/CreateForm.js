@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { Form, Input, message, Space } from "antd";
 import axios from "axios";
-import "./css/SiteHeader.css";
-import { Form, Space, Input, message, Button } from "antd";
+import React from "react";
 import { listStyle } from "../Styles/ComponentStyle";
 import SubmitButton from "../Utils/SubmitButton";
-import FormField from "./Utils/FormField";
 import TitleField from "../Utils/TitleField";
+import "./css/SiteHeader.css";
+import FormField from "./Utils/FormField";
 import SiteHeader from "./Utils/SiteHeader";
 const { TextArea } = Input;
 
@@ -33,23 +33,25 @@ const About = () => {
   );
 };
 
-export default function CreateForm({ formId }) {
+export default function CreateForm({ formId, initialValues }) {
+  const [form] = Form.useForm();
+
   const onFinish = (data) => {
     console.log(data);
     let payload = {
       title: data.title,
       about: data.about,
-      questions: [],
+      questions: {},
     };
 
     for (let i = 0; i < data.questions.length; i++) {
       payload.questions[i] = data.questions[i];
     }
 
-    // console.log(payload);
-    formId = "";
+    console.log(payload);
 
-    axios.put(`/form/${formId}`, payload).then(
+    // ! change to put
+    axios.post(`/form/${formId}`, payload).then(
       (response) => {
         console.log(response.data);
         message.success("Saved successfully!");
@@ -60,24 +62,6 @@ export default function CreateForm({ formId }) {
       }
     );
   };
-
-  const [form] = Form.useForm();
-  const [initialValues, setInitialValues] = useState({
-    title: "Untitled Form",
-    about: "about...",
-    questions: [],
-  });
-
-  useEffect(() => {
-    const url = "http://localhost:8080/form/612b271a409b9413e7e4431d";
-    const fetchData = async () => {
-      const result = await axios.get(url);
-      setInitialValues(result.data);
-    };
-    fetchData();
-  }, []);
-
-  console.log(initialValues);
 
   const onChange = (e) => {
     if (e.target.value === "") {

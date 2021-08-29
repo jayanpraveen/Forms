@@ -4,17 +4,28 @@ import CreateForm from "./CreateForm";
 import LoadingButton from "../Utils/LoadingButton";
 
 export default function FormSchema({ formId }) {
-  const [FormData, setFormData] = useState({});
   const [Loading, setLoading] = useState(true);
+  const [initialValues, setInitialValues] = useState({
+    title: "Untitled Form",
+    about: "",
+    questions: [],
+  });
+  formId = "612b68d07c94642b12189696";
 
+  // ! handle invalid formId
   useEffect(() => {
+    const url = `http://localhost:8080/form/${formId}`;
     const fetchData = async () => {
-      const result = await axios.get(`/form/${formId}`);
-      setFormData(result.data);
+      const result = await axios.get(url);
+      setInitialValues({
+        title: result.data.title,
+        about: result.data.about,
+        questions: Object.values(result.data.questions).sort(),
+      });
       setLoading(false);
     };
     fetchData();
-  }, [setFormData, formId]);
+  }, [formId]);
 
   return (
     <div>
@@ -22,7 +33,7 @@ export default function FormSchema({ formId }) {
         <LoadingButton />
       ) : (
         <div>
-          <CreateForm />
+          <CreateForm initialValues={initialValues} />
         </div>
       )}
     </div>

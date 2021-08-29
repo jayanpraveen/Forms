@@ -4,12 +4,7 @@ const { TextArea } = Input;
 
 export default function FormHeaderField({ restField, name, fieldKey }) {
   return (
-    <Form.Item
-      {...restField}
-      name={name}
-      fieldKey={[fieldKey, "value"]}
-      style={{ margin: "10px" }}
-    >
+    <Form.Item {...restField} name={name} fieldKey={[fieldKey, "value"]}>
       <TextArea
         bordered={false}
         placeholder="input goes here..."

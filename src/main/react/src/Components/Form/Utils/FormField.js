@@ -18,7 +18,7 @@ export default function FormField() {
           <div>
             {fields.map(({ key, name, fieldKey, ...restField }) => (
               <div key={key}>
-                <List.Item style={{ padding: "0px" }}>
+                <List.Item style={{ padding: "0px", margin: "10px" }}>
                   <Card
                     headStyle={cardHead}
                     bodyStyle={cardBody}
