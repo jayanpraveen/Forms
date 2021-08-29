@@ -1,5 +1,6 @@
 import ResponseSchema from "./Components/Response/ResponseSchema";
 import FormSchema from "./Components/Form/FormSchema";
+import CreateModal from "./Components/Layout/CreateModal";
 
 function App() {
   /**
@@ -10,7 +11,8 @@ function App() {
    */
   return (
     <div>
-      <FormSchema />
+      {/* <FormSchema /> */}
+      <CreateModal />
       {/* <ResponseSchema /> */}
     </div>
   );

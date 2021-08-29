@@ -9,7 +9,7 @@ export default function FormSchema({ formId }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(`/form/${formId}`);
+      const result = await axios.get(`/form/${formId}`);
       setFormData(result.data);
       setLoading(false);
     };

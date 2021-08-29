@@ -10,7 +10,7 @@ import LoadingButton from "../Utils/LoadingButton";
 export default function ResponseSchema() {
   const [APIData, setAPIData] = useState({ questions: {} });
   const [Loading, setLoading] = useState(true);
-  const formId = "6129e069632b774fa558eb30";
+  const formId = "";
   const url = `http://localhost:8080/form/${formId}`;
 
   useEffect(() => {
