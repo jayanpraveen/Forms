@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./css/SiteHeader.css";
-import { Form, Space, Input, message } from "antd";
-
+import { Form, Space, Input, message, Button } from "antd";
 import { listStyle } from "../Styles/ComponentStyle";
 import SubmitButton from "../Utils/SubmitButton";
 import FormField from "./Utils/FormField";
@@ -10,21 +9,47 @@ import TitleField from "../Utils/TitleField";
 import SiteHeader from "./Utils/SiteHeader";
 const { TextArea } = Input;
 
-export default function CreateForm() {
+const Title = ({ onChange }) => {
+  return (
+    <Form.Item name="title">
+      <Input
+        onBlur={onChange}
+        bordered={false}
+        style={{ fontSize: "28px" }}
+        placeholder="Form title"
+      />
+    </Form.Item>
+  );
+};
+const About = () => {
+  return (
+    <Form.Item name="about">
+      <TextArea
+        bordered={false}
+        placeholder="Form description"
+        autoSize={{ minRows: 3 }}
+      />
+    </Form.Item>
+  );
+};
+
+export default function CreateForm({ formId }) {
   const onFinish = (data) => {
+    console.log(data);
     let payload = {
       title: data.title,
       about: data.about,
-      questions: {},
+      questions: [],
     };
 
     for (let i = 0; i < data.questions.length; i++) {
       payload.questions[i] = data.questions[i];
     }
 
-    console.log(payload);
+    // console.log(payload);
+    formId = "";
 
-    axios.post("/form", payload).then(
+    axios.put(`/form/${formId}`, payload).then(
       (response) => {
         console.log(response.data);
         message.success("Saved successfully!");
@@ -35,7 +60,24 @@ export default function CreateForm() {
       }
     );
   };
+
   const [form] = Form.useForm();
+  const [initialValues, setInitialValues] = useState({
+    title: "Untitled Form",
+    about: "about...",
+    questions: [],
+  });
+
+  useEffect(() => {
+    const url = "http://localhost:8080/form/612b271a409b9413e7e4431d";
+    const fetchData = async () => {
+      const result = await axios.get(url);
+      setInitialValues(result.data);
+    };
+    fetchData();
+  }, []);
+
+  console.log(initialValues);
 
   const onChange = (e) => {
     if (e.target.value === "") {
@@ -44,35 +86,6 @@ export default function CreateForm() {
         title: "Untitled Form",
       });
     }
-  };
-  const Title = () => {
-    return (
-      <Form.Item name="title">
-        <Input
-          onBlur={onChange}
-          bordered={false}
-          style={{ fontSize: "28px" }}
-          placeholder="Form title"
-        />
-      </Form.Item>
-    );
-  };
-  const About = () => {
-    return (
-      <Form.Item name="about">
-        <TextArea
-          bordered={false}
-          placeholder="Form description"
-          autoSize={{ minRows: 3 }}
-        />
-      </Form.Item>
-    );
-  };
-
-  const initialValues = {
-    title: "Untitled Form",
-    about: "",
-    questions: [""],
   };
 
   return (
@@ -88,7 +101,7 @@ export default function CreateForm() {
         initialValues={initialValues}
       >
         <Space direction="vertical">
-          <TitleField title={<Title />} about={<About />} />
+          <TitleField title={<Title onChange={onChange} />} about={<About />} />
           <FormField />
           <SubmitButton value={"Save"} />
         </Space>

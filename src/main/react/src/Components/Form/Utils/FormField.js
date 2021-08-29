@@ -19,35 +19,34 @@ export default function FormField() {
             {fields.map(({ key, name, fieldKey, ...restField }) => (
               <div key={key}>
                 <List.Item style={{ padding: "0px" }}>
-                  <Form.Item
-                    {...restField}
-                    name={name}
-                    fieldKey={[fieldKey, "value"]}
-                    style={{ margin: "10px" }}
-                  >
-                    <Card
-                      headStyle={cardHead}
-                      bodyStyle={cardBody}
-                      style={cardStyle}
-                      size="small"
-                      title={<FormHeaderField />}
-                    >
-                      <Input
-                        bordered={false}
-                        placeholder="response goes here"
-                        disabled
+                  <Card
+                    headStyle={cardHead}
+                    bodyStyle={cardBody}
+                    style={cardStyle}
+                    size="small"
+                    title={
+                      <FormHeaderField
+                        restField={restField}
+                        name={name}
+                        fieldKey={fieldKey}
                       />
-                      <span
-                        style={{ display: "flex", justifyContent: "flex-end" }}
-                      >
-                        <DeleteTwoTone
-                          style={deleteIconStyle}
-                          twoToneColor="crimson"
-                          onClick={() => remove(name)}
-                        />
-                      </span>
-                    </Card>
-                  </Form.Item>
+                    }
+                  >
+                    <Input
+                      bordered={false}
+                      placeholder="response goes here"
+                      disabled
+                    />
+                    <span
+                      style={{ display: "flex", justifyContent: "flex-end" }}
+                    >
+                      <DeleteTwoTone
+                        style={deleteIconStyle}
+                        twoToneColor="crimson"
+                        onClick={() => remove(name)}
+                      />
+                    </span>
+                  </Card>
                 </List.Item>
               </div>
             ))}

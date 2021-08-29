@@ -1,15 +1,20 @@
 import React from "react";
-import { Input } from "antd";
+import { Input, Form } from "antd";
 const { TextArea } = Input;
 
-export default function FormHeaderField() {
+export default function FormHeaderField({ restField, name, fieldKey }) {
   return (
-    <div>
+    <Form.Item
+      {...restField}
+      name={name}
+      fieldKey={[fieldKey, "value"]}
+      style={{ margin: "10px" }}
+    >
       <TextArea
         bordered={false}
         placeholder="input goes here..."
         autoSize={{ minRows: 2, maxRows: 7 }}
       />
-    </div>
+    </Form.Item>
   );
 }

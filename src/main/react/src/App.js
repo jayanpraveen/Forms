@@ -11,8 +11,8 @@ function App() {
    */
   return (
     <div>
-      {/* <FormSchema /> */}
-      <CreateModal />
+      <FormSchema />
+      {/* <CreateModal /> */}
       {/* <ResponseSchema /> */}
     </div>
   );
