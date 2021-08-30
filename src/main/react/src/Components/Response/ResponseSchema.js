@@ -1,4 +1,4 @@
-import { Form, Space } from "antd";
+import { Divider, Form, Space, message } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { listStyle } from "../Styles/ComponentStyle";
@@ -10,8 +10,8 @@ import LoadingButton from "../Utils/LoadingButton";
 export default function ResponseSchema({ formId }) {
   const [APIData, setAPIData] = useState({ questions: {} });
   const [Loading, setLoading] = useState(true);
+  formId = "612bb595ba652b7464b6eac4";
   const url = `form/${formId}`;
-  formId = "612bb1d6ba652b7464b6eab7";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,11 +22,30 @@ export default function ResponseSchema({ formId }) {
     fetchData();
   }, [setAPIData, url]);
 
-  const onFinish = (values) => console.log(values);
+  const onFinish = (values) => {
+    let payload = {
+      formId: "612bb595ba652b7464b6eac4",
+      response: [values],
+    };
+
+    console.log(payload);
+
+    axios.put(`/res/`, payload).then(
+      (response) => {
+        console.log(response.data);
+        message.success("Saved successfully!");
+      },
+      (error) => {
+        console.log(error);
+        message.error("Something wrong, try again");
+      }
+    );
+  };
 
   const Response = ({ APIData }) => (
     <div>
       <TitleField title={APIData.title} about={APIData.about} />
+      <Divider style={{ padding: "0px", margin: "8px" }} />
       <Form onFinish={onFinish} style={listStyle}>
         <Space direction="vertical">
           <ReponseField APIData={APIData} />

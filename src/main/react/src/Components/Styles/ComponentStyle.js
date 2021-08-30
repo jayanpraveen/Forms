@@ -2,8 +2,8 @@ const cardStyle = {
   background: "white",
   display: "flex",
   justifyContent: "center",
-  width: "540px",
-  padding: "7px",
+  width: "560px",
+  padding: "10px",
   flexDirection: "column",
   border: "1.5px solid #dadce0",
   wordWrap: "breakWord",
@@ -32,7 +32,7 @@ const headerStripeStyle = {
   left: "-1px",
   top: "-1px",
   // * fix width
-  width: "540px",
+  width: "560px",
 };
 
 const submitStyle = {

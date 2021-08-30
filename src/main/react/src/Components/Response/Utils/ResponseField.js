@@ -12,27 +12,31 @@ export default function ResponseField({ APIData }) {
         bordered={false}
         dataSource={keyArray}
         renderItem={(item) => (
-          <Form.Item name={item} style={{ margin: "10px" }}>
-            <List.Item style={{ padding: "0px" }}>
-              <Card
-                headStyle={cardHead}
-                bodyStyle={cardBody}
-                style={cardStyle}
-                size="small"
-                title={
-                  <div style={{ whiteSpace: "pre-line" }}>
-                    {questions[item]}
-                  </div>
-                }
+          <List.Item style={{ padding: "0px", margin: "10px" }}>
+            <Card
+              headStyle={cardHead}
+              bodyStyle={cardBody}
+              style={cardStyle}
+              size="small"
+              title={
+                <div style={{ whiteSpace: "pre-line", margin: "7px" }}>
+                  {questions[item]}
+                </div>
+              }
+            >
+              <Form.Item
+                name={item}
+                style={{ padding: "0px", marginBottom: "0px" }}
+                initialValue=""
               >
                 <TextArea
                   style={{ border: "none" }}
                   placeholder="Enter your answer"
                   autoSize={{ minRows: 2, maxRows: 4 }}
                 />
-              </Card>
-            </List.Item>
-          </Form.Item>
+              </Form.Item>
+            </Card>
+          </List.Item>
         )}
       />
     </div>

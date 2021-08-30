@@ -1,4 +1,4 @@
-import { Form, Input, message, Space, Divider } from "antd";
+import { Form, message, Space, Divider, Input } from "antd";
 import axios from "axios";
 import React from "react";
 import { listStyle } from "../Styles/ComponentStyle";
@@ -8,31 +8,30 @@ import FormField from "./Utils/FormField";
 import SiteHeader from "./Utils/SiteHeader";
 const { TextArea } = Input;
 
-const Title = ({ onChange }) => {
-  return (
-    <Form.Item name="title">
-      <Input
-        onBlur={onChange}
-        bordered={false}
-        style={{ fontSize: "28px" }}
-        placeholder="Form title"
-      />
-    </Form.Item>
-  );
-};
-const About = () => {
-  return (
-    <Form.Item name="about">
-      <TextArea
-        bordered={false}
-        placeholder="Form description"
-        autoSize={{ minRows: 3 }}
-      />
-    </Form.Item>
-  );
-};
-
 export default function CreateForm({ formId, initialValues }) {
+  const Title = () => {
+    return (
+      <Form.Item name="title">
+        <Input
+          onBlur={onChange}
+          bordered={false}
+          style={{ fontSize: "28px" }}
+          placeholder="Form title"
+        />
+      </Form.Item>
+    );
+  };
+  const About = () => {
+    return (
+      <Form.Item name="about">
+        <TextArea
+          bordered={false}
+          placeholder="Form description"
+          autoSize={{ minRows: 3 }}
+        />
+      </Form.Item>
+    );
+  };
   const [form] = Form.useForm();
 
   const onFinish = (data) => {
@@ -95,8 +94,9 @@ export default function CreateForm({ formId, initialValues }) {
             </div>
             <Divider style={{ margin: "48px" }} />
             <TitleField
-              title={<Title onChange={onChange} />}
+              title={<Title />}
               about={<About />}
+              onChange={onChange}
             />
             <FormField style={listStyle} />
           </Space>

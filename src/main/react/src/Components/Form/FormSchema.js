@@ -20,7 +20,7 @@ export default function FormSchema({ formId }) {
       setInitialValues({
         title: result.data.title,
         about: result.data.about,
-        questions: Object.values(result.data.questions).sort(),
+        questions: Object.values(result.data.questions),
       });
       setLoading(false);
     };

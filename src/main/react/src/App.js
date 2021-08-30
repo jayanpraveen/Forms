@@ -3,6 +3,7 @@ import FormSchema from "./Components/Form/FormSchema";
 import CreateModal from "./Components/Layout/CreateModal";
 import SiteHeader from "./Components/Form/Utils/SiteHeader.js";
 import "./Components/Form/css/SiteHeader.css";
+import { Route, NavLink, HashRouter } from "react-router-dom";
 
 function App() {
   /**
@@ -14,8 +15,8 @@ function App() {
   return (
     <div>
       {/* <CreateModal /> */}
-      <FormSchema />
-      {/* <ResponseSchema /> */}
+      {/* <FormSchema /> */}
+      <ResponseSchema />
     </div>
   );
 }
