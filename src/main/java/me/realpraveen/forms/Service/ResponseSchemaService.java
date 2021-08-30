@@ -26,7 +26,7 @@ public class ResponseSchemaService {
 		return responseSchemaRepository.findById(id).orElse(null);
 	}
 
-	public List<ResponseSchema> findByFromId(String formId) {
+	public List<ResponseSchema> getOnlyResponse(String formId) {
 		return responseSchemaRepository.findByFormId(formId);
 	}
 
@@ -39,7 +39,7 @@ public class ResponseSchemaService {
 		return responseSchemaRepository.insert(response);
 	}
 
-	public UpdateResult pushReponse(ResponseSchema response) {
+	public UpdateResult pushResponse(ResponseSchema response) {
 		return responseSchemaRepository.pushResponse(response);
 	}
 

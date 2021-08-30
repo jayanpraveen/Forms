@@ -1,11 +1,10 @@
-import { Form, Input, Card } from "antd";
+import { Card } from "antd";
 import React from "react";
 import {
   cardStyle,
   headerStripeStyle,
   listStyle,
 } from "../Styles/ComponentStyle";
-const { TextArea } = Input;
 
 export default function TitleField({ title, about }) {
   return (

@@ -8,7 +8,7 @@ const CreateForm = ({ visible, onCreate, onCancel }) => {
   return (
     <Modal
       visible={visible}
-      title="Create a new form 🧪:"
+      title="Create a new form 📜:"
       okText="Create"
       cancelText="Cancel"
       onCancel={onCancel}

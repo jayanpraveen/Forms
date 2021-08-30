@@ -44,9 +44,9 @@ public class ResponseSchemaController {
 		return responseDTOService.buildResponseDTO(formId);
 	}
 
-	@GetMapping("/form/{formId}")
-	public List<ResponseSchema> findByFormId(@PathVariable String formId) {
-		return responseSchemaService.findByFromId(formId);
+	@GetMapping("/only/{formId}")
+	public List<ResponseSchema> getOnlyResponse(@PathVariable String formId) {
+		return responseSchemaService.getOnlyResponse(formId);
 	}
 
 	@PostMapping
@@ -55,8 +55,8 @@ public class ResponseSchemaController {
 	}
 
 	@PutMapping
-	public UpdateResult pushReponse(@RequestBody ResponseSchema response) {
-		return responseSchemaService.pushReponse(response);
+	public UpdateResult pushResponse(@RequestBody ResponseSchema response) {
+		return responseSchemaService.pushResponse(response);
 	}
 
 }

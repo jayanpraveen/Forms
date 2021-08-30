@@ -36,16 +36,15 @@ public class FormSchemaService {
 	}
 
 	public FormSchema insertFormSchema(FormSchema formSchema) {
-		var form = formSchemaRepository.insert(formSchema);
-		String formId = form.getFormId();
 
 		List<HashMap<String, String>> map = new ArrayList<HashMap<String, String>>();
 
-		// ? perform check for formId
+		var form = formSchemaRepository.insert(formSchema);
+		String formId = form.getFormId();
 		var response = new ResponseSchema(formId, map);
 		responseSchemaRepository.insert(response);
 
-		log.info(formSchema.getFormId());
+		log.info(formId);
 		log.info(response.getFormId());
 		return form;
 	}

@@ -10,7 +10,7 @@ import LoadingButton from "../Utils/LoadingButton";
 export default function ResponseSchema({ formId }) {
   const [APIData, setAPIData] = useState({ questions: {} });
   const [Loading, setLoading] = useState(true);
-  formId = "612bb595ba652b7464b6eac4";
+
   const url = `form/${formId}`;
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function ResponseSchema({ formId }) {
 
   const onFinish = (values) => {
     let payload = {
-      formId: "612bb595ba652b7464b6eac4",
+      formId: formId,
       response: [values],
     };
 
