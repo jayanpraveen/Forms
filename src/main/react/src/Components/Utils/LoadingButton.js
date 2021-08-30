@@ -1,7 +1,7 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
-const loadingIcon = <LoadingOutlined spin style={{ fontSize: "38px" }} />;
+const loadingIcon = <LoadingOutlined spin style={{ fontSize: "42px" }} />;
 
 const style = {
   display: "flex",

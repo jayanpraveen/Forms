@@ -24,7 +24,7 @@ export default function ResponseSchema({ formId }) {
 
   const onFinish = (values) => console.log(values);
 
-  const Comp = ({ APIData }) => (
+  const Response = ({ APIData }) => (
     <div>
       <TitleField title={APIData.title} about={APIData.about} />
       <Form onFinish={onFinish} style={listStyle}>
@@ -35,5 +35,5 @@ export default function ResponseSchema({ formId }) {
       </Form>
     </div>
   );
-  return <>{Loading ? <LoadingButton /> : <Comp APIData={APIData} />}</>;
+  return <>{Loading ? <LoadingButton /> : <Response APIData={APIData} />}</>;
 }

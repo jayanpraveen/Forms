@@ -1,12 +1,23 @@
 import React from "react";
-import { Button } from "antd";
+import { Button, Tooltip, Tag } from "antd";
 
 export default function SubmitButton({ value }) {
   return (
     <div style={{ padding: "0px", paddingLeft: "15px" }}>
-      <Button type="primary" htmlType="submit">
-        {value}
-      </Button>
+      <Tooltip
+        mouseEnterDelay="1"
+        title={
+          <div style={{ color: "black" }}>
+            <Tag>{"Ctrl"}</Tag>
+            {"+ s"}
+          </div>
+        }
+        color="#fff"
+      >
+        <Button type="primary" htmlType="submit">
+          {value}
+        </Button>
+      </Tooltip>
     </div>
   );
 }

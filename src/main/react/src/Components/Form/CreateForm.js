@@ -63,32 +63,47 @@ export default function CreateForm({ formId, initialValues }) {
   };
 
   const onChange = (e) => {
+    saveKey(e);
     if (e.target.value === "") {
       message.warning("Title cannot be empty");
       form.setFieldsValue({
-        title: "Untitled Form",
+        title: initialValues.title,
       });
+    }
+  };
+
+  const saveKey = (e) => {
+    console.log("do validate");
+    if (e.key === "s" && e.metaKey) {
+      e.preventDefault();
+      const val = form.getFieldsValue();
+      onFinish(val);
     }
   };
 
   return (
     <>
-      <div className="site-page-wrapper">
-        <SiteHeader title="batman begins" subTitle="the movie" />
+      <div onKeyDown={saveKey}>
+        <div className="site-page-wrapper">
+          <SiteHeader title="batman begins" subTitle="the movie" />
+        </div>
+        <Form
+          form={form}
+          style={listStyle}
+          name="dync_form"
+          onFinish={onFinish}
+          initialValues={initialValues}
+        >
+          <Space direction="vertical">
+            <TitleField
+              title={<Title onChange={onChange} />}
+              about={<About />}
+            />
+            <FormField />
+            <SubmitButton value={"Save"} />
+          </Space>
+        </Form>
       </div>
-      <Form
-        form={form}
-        style={listStyle}
-        name="dync_form"
-        onFinish={onFinish}
-        initialValues={initialValues}
-      >
-        <Space direction="vertical">
-          <TitleField title={<Title onChange={onChange} />} about={<About />} />
-          <FormField />
-          <SubmitButton value={"Save"} />
-        </Space>
-      </Form>
     </>
   );
 }
