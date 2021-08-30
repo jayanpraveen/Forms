@@ -5,12 +5,17 @@ const { TextArea } = Input;
 const FormHeaderField = ({ restField, name, fieldKey }, ref) => {
   return (
     <>
-      <Form.Item {...restField} name={name} fieldKey={[fieldKey, "value"]}>
+      <Form.Item
+        {...restField}
+        name={name}
+        fieldKey={[fieldKey, "value"]}
+        style={{ padding: "0px", marginBottom: "0px" }}
+      >
         <TextArea
           ref={ref}
           bordered={false}
           placeholder="input goes here..."
-          autoSize={{ minRows: 2, maxRows: 7 }}
+          autoSize={{ minRows: 1, maxRows: 7 }}
         />
       </Form.Item>
     </>

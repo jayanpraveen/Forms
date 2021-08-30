@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { DeleteTwoTone } from "@ant-design/icons";
-import { Card, Form, Input, List } from "antd";
+import { Card, Form, Input, List, Tooltip, Tag } from "antd";
 import { cardBody, cardHead, cardStyle } from "../../Styles/ComponentStyle";
 import AddButton from "./AddButton";
 import FormHeaderField from "./FormHeaderField";
@@ -10,10 +10,10 @@ const deleteIconStyle = {
   fontSize: "20px",
 };
 
-export default function FormField() {
+export default function FormField({ style }) {
   const inputRef = useRef(null);
   return (
-    <>
+    <div style={style}>
       <Form.List name="questions">
         {(fields, { add, remove }) => (
           <div>
@@ -54,11 +54,22 @@ export default function FormField() {
                     <span
                       style={{ display: "flex", justifyContent: "flex-end" }}
                     >
-                      <DeleteTwoTone
-                        style={deleteIconStyle}
-                        twoToneColor="crimson"
-                        onClick={() => remove(name)}
-                      />
+                      <Tooltip
+                        mouseEnterDelay="0.5"
+                        title={
+                          <div style={{ color: "red" }}>
+                            <Tag color="red">{"Ctrl"}</Tag>
+                            {"+ k"}
+                          </div>
+                        }
+                        color={"#fff"}
+                      >
+                        <DeleteTwoTone
+                          style={deleteIconStyle}
+                          twoToneColor="crimson"
+                          onClick={() => remove(name)}
+                        />
+                      </Tooltip>
                     </span>
                   </Card>
                 </List.Item>
@@ -70,6 +81,6 @@ export default function FormField() {
           </div>
         )}
       </Form.List>
-    </>
+    </div>
   );
 }

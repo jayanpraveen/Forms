@@ -3,7 +3,7 @@ const cardStyle = {
   display: "flex",
   justifyContent: "center",
   width: "540px",
-  padding: "10px",
+  padding: "7px",
   flexDirection: "column",
   border: "1.5px solid #dadce0",
   wordWrap: "breakWord",

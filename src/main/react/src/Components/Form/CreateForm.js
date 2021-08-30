@@ -1,8 +1,7 @@
-import { Form, Input, message, Space } from "antd";
+import { Form, Input, message, Space, Divider } from "antd";
 import axios from "axios";
 import React from "react";
 import { listStyle } from "../Styles/ComponentStyle";
-import SubmitButton from "../Utils/SubmitButton";
 import TitleField from "../Utils/TitleField";
 import "./css/SiteHeader.css";
 import FormField from "./Utils/FormField";
@@ -73,7 +72,6 @@ export default function CreateForm({ formId, initialValues }) {
   };
 
   const saveKey = (e) => {
-    console.log("do validate");
     if (e.key === "s" && e.metaKey) {
       e.preventDefault();
       const val = form.getFieldsValue();
@@ -84,23 +82,23 @@ export default function CreateForm({ formId, initialValues }) {
   return (
     <>
       <div onKeyDown={saveKey}>
-        <div className="site-page-wrapper">
-          <SiteHeader title="batman begins" subTitle="the movie" />
-        </div>
         <Form
           form={form}
-          style={listStyle}
           name="dync_form"
           onFinish={onFinish}
           initialValues={initialValues}
+          layout="vertical"
         >
-          <Space direction="vertical">
+          <Space style={listStyle} direction="vertical">
+            <div className="site-page-wrapper">
+              <SiteHeader title="batman begins" subTitle="the movie" />
+            </div>
+            <Divider style={{ margin: "48px" }} />
             <TitleField
               title={<Title onChange={onChange} />}
               about={<About />}
             />
-            <FormField />
-            <SubmitButton value={"Save"} />
+            <FormField style={listStyle} />
           </Space>
         </Form>
       </div>
