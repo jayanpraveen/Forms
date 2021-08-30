@@ -7,11 +7,11 @@ import TitleField from "../Utils/TitleField";
 import ReponseField from "./Utils/ResponseField";
 import LoadingButton from "../Utils/LoadingButton";
 
-export default function ResponseSchema() {
+export default function ResponseSchema({ formId }) {
   const [APIData, setAPIData] = useState({ questions: {} });
   const [Loading, setLoading] = useState(true);
-  const formId = "";
-  const url = `http://localhost:8080/form/${formId}`;
+  const url = `form/${formId}`;
+  formId = "612bb1d6ba652b7464b6eab7";
 
   useEffect(() => {
     const fetchData = async () => {

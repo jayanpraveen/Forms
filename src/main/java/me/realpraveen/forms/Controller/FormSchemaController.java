@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,14 +32,19 @@ public class FormSchemaController {
 		return formSchemaService.findAllForms();
 	}
 
-	@GetMapping("/{id}")
-	public FormSchema findById(@PathVariable String id) {
-		return formSchemaService.findById(id);
+	@GetMapping("/{formId}")
+	public FormSchema findById(@PathVariable String formId) {
+		return formSchemaService.findById(formId);
 	}
 
 	@PostMapping
 	public FormSchema insertFormSchema(@RequestBody FormSchema formSchema) {
 		return formSchemaService.insertFormSchema(formSchema);
+	}
+
+	@PutMapping("/{formId}")
+	public FormSchema putMethodName(@RequestBody FormSchema formSchema) {
+		return formSchemaService.updateFormSchema(formSchema);
 	}
 
 }

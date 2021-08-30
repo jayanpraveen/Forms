@@ -10,11 +10,11 @@ export default function FormSchema({ formId }) {
     about: "",
     questions: [],
   });
-  formId = "612b68d07c94642b12189696";
+  formId = "612bb595ba652b7464b6eac4";
 
   // ! handle invalid formId
   useEffect(() => {
-    const url = `http://localhost:8080/form/${formId}`;
+    const url = `/form/${formId}`;
     const fetchData = async () => {
       const result = await axios.get(url);
       setInitialValues({
@@ -32,9 +32,9 @@ export default function FormSchema({ formId }) {
       {Loading ? (
         <LoadingButton />
       ) : (
-        <div>
-          <CreateForm initialValues={initialValues} />
-        </div>
+        <>
+          <CreateForm initialValues={initialValues} formId={formId} />
+        </>
       )}
     </div>
   );

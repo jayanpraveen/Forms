@@ -39,6 +39,7 @@ export default function CreateForm({ formId, initialValues }) {
   const onFinish = (data) => {
     console.log(data);
     let payload = {
+      formId: formId,
       title: data.title,
       about: data.about,
       questions: {},
@@ -49,9 +50,7 @@ export default function CreateForm({ formId, initialValues }) {
     }
 
     console.log(payload);
-
-    // ! change to put
-    axios.post(`/form/${formId}`, payload).then(
+    axios.put(`/form/${formId}`, payload).then(
       (response) => {
         console.log(response.data);
         message.success("Saved successfully!");
