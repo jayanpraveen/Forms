@@ -1,0 +1,19 @@
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+.addIcon {
+  font-size: 50px;
+  transition: font-size 0.2s;
+}
+.addIcon:hover {
+  font-size: 60px;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+[data-theme="dark"] .site-layout .site-layout-background {
+  background: #141414;
+}

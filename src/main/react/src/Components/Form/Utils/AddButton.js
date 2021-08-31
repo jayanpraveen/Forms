@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/AddButton.css";
 import { Tooltip, Tag } from "antd";
 import { PlusCircleTwoTone } from "@ant-design/icons";
 
@@ -6,7 +7,7 @@ function AddButton({ add }) {
   return (
     <>
       <Tooltip
-        mouseEnterDelay="0.5"
+        mouseEnterDelay="1"
         title={
           <div style={{ color: "steelblue" }}>
             <Tag color="blue">{"Ctrl"}</Tag>
@@ -15,14 +16,14 @@ function AddButton({ add }) {
         }
         color="#fff"
       >
-        <PlusCircleTwoTone
+        <div
           style={{
             display: "flex",
             justifyContent: "center",
-            fontSize: "35px",
           }}
-          onClick={() => add()}
-        />
+        >
+          <PlusCircleTwoTone className="AddButton" onClick={() => add()} />
+        </div>
       </Tooltip>
     </>
   );

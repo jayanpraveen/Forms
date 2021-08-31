@@ -1,0 +1,21 @@
+.AddButton {
+  display: flex;
+  justify-content: center;
+  color: inherit;
+  font-style: normal;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  vertical-align: -0.125em;
+  font-size: 35px;
+  border-radius: 50%;
+  color: #555;
+  background-color: inherit;
+  transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out,
+    font-size 0.1s;
+}
+.AddButton:hover {
+  font-size: 39px;
+  color: #fff;
+  background-color: #177ddc;
+}
