@@ -15,6 +15,6 @@ public class ResponseDTO {
 
 	private String title;
 	private Map<String, String> questions;
-	private List<List<HashMap<String, String>>> response;
+	private List<HashMap<String, String>> response;
 
 }

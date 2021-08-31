@@ -42,7 +42,7 @@ public class FormSchemaController {
 		return formSchemaService.insertFormSchema(formSchema);
 	}
 
-	@PutMapping("/{formId}")
+	@PutMapping
 	public FormSchema putMethodName(@RequestBody FormSchema formSchema) {
 		return formSchemaService.updateFormSchema(formSchema);
 	}

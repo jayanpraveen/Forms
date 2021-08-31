@@ -48,7 +48,7 @@ export default function CreateForm({ formId, initialValues }) {
     }
 
     console.log(payload);
-    axios.put(`/form/${formId}`, payload).then(
+    axios.put(`/form`, payload).then(
       (response) => {
         console.log(response.data);
         message.success("Saved successfully!");

@@ -1,7 +1,5 @@
 package me.realpraveen.forms.Service;
 
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +9,6 @@ import me.realpraveen.forms.Repository.FormSchemaRepository;
 import me.realpraveen.forms.Repository.ResponseSchemaRepository;
 
 @Service
-
 public class ResponseDTOService {
 
 	FormSchemaRepository formRepository;
@@ -27,8 +24,8 @@ public class ResponseDTOService {
 		var form = formRepository.findById(formId).orElse(null);
 		var title = form.getTitle();
 		var questions = form.getQuestions();
-		var responses = responseRepository.findByFormId(formId).stream().map(ResponseSchema::getResponse)
-				.collect(Collectors.toList());
+		var responses = responseRepository.findByFormId(formId).stream().map(ResponseSchema::getResponse).iterator()
+				.next();
 
 		return ResponseDTO.builder().title(title).questions(questions).response(responses).build();
 	}
