@@ -3,6 +3,8 @@ package me.realpraveen.forms.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,23 +30,23 @@ public class FormSchemaController {
 	}
 
 	@GetMapping
-	public List<FormSchema> findAllFroms() {
-		return formSchemaService.findAllForms();
+	public ResponseEntity<List<FormSchema>> findAllFroms() {
+		return ResponseEntity.ok(formSchemaService.findAllForms());
 	}
 
 	@GetMapping("/{formId}")
-	public FormSchema findById(@PathVariable String formId) {
-		return formSchemaService.findById(formId);
+	public ResponseEntity<FormSchema> findById(@PathVariable String formId) {
+		return ResponseEntity.ok(formSchemaService.findById(formId));
 	}
 
 	@PostMapping
-	public FormSchema insertFormSchema(@RequestBody FormSchema formSchema) {
-		return formSchemaService.insertFormSchema(formSchema);
+	public ResponseEntity<FormSchema> insertFormSchema(@RequestBody FormSchema formSchema) {
+		return new ResponseEntity<>(formSchemaService.insertFormSchema(formSchema), HttpStatus.CREATED);
 	}
 
 	@PutMapping
-	public FormSchema putMethodName(@RequestBody FormSchema formSchema) {
-		return formSchemaService.updateFormSchema(formSchema);
+	public ResponseEntity<FormSchema> updateFormSchema(@RequestBody FormSchema formSchema) {
+		return new ResponseEntity<>(formSchemaService.updateFormSchema(formSchema), HttpStatus.OK);
 	}
 
 }

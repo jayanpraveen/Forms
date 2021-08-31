@@ -5,6 +5,8 @@ import java.util.List;
 import com.mongodb.client.result.UpdateResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,28 +37,28 @@ public class ResponseSchemaController {
 	}
 
 	@GetMapping
-	public List<ResponseSchema> findAllResposne() {
-		return responseSchemaService.findAllResponse();
+	public ResponseEntity<List<ResponseSchema>> findAllResposne() {
+		return ResponseEntity.ok(responseSchemaService.findAllResponse());
 	}
 
 	@GetMapping("/{formId}")
-	public ResponseDTO getResponse(@PathVariable String formId) {
-		return responseDTOService.buildResponseDTO(formId);
+	public ResponseEntity<ResponseDTO> getResponse(@PathVariable String formId) {
+		return ResponseEntity.ok(responseDTOService.buildResponseDTO(formId));
 	}
 
 	@GetMapping("/only/{formId}")
-	public List<ResponseSchema> getOnlyResponse(@PathVariable String formId) {
-		return responseSchemaService.getOnlyResponse(formId);
+	public ResponseEntity<List<ResponseSchema>> getOnlyResponse(@PathVariable String formId) {
+		return ResponseEntity.ok(responseSchemaService.getOnlyResponse(formId));
 	}
 
 	@PostMapping
-	public ResponseSchema insertResponseSchema(@RequestBody ResponseSchema response) {
-		return responseSchemaService.insertResponseSchema(response);
+	public ResponseEntity<ResponseSchema> insertResponseSchema(@RequestBody ResponseSchema response) {
+		return new ResponseEntity<>(responseSchemaService.insertResponseSchema(response), HttpStatus.CREATED);
 	}
 
 	@PutMapping
-	public UpdateResult pushResponse(@RequestBody ResponseSchema response) {
-		return responseSchemaService.pushResponse(response);
+	public ResponseEntity<UpdateResult> pushResponse(@RequestBody ResponseSchema response) {
+		return ResponseEntity.ok(responseSchemaService.pushResponse(response));
 	}
 
 }
