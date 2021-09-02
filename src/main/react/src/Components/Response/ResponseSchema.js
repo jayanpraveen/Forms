@@ -30,7 +30,7 @@ export default function ResponseSchema({ formId }) {
 
     console.log(payload);
 
-    axios.put(`/res/`, payload).then(
+    axios.put(`/res`, payload).then(
       (response) => {
         console.log(response.data);
         message.success("Saved successfully!");

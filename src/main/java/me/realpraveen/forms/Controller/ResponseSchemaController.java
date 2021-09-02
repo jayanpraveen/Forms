@@ -23,7 +23,7 @@ import me.realpraveen.forms.Service.ResponseSchemaService;
 
 @RestController
 @RequestMapping(value = "/res")
-@CrossOrigin
+@CrossOrigin("http://localhost:3000")
 public class ResponseSchemaController {
 
 	ResponseSchemaService responseSchemaService;
@@ -56,6 +56,7 @@ public class ResponseSchemaController {
 		return new ResponseEntity<>(responseSchemaService.insertResponseSchema(response), HttpStatus.CREATED);
 	}
 
+	// ! thorow not found exception
 	@PutMapping
 	public ResponseEntity<UpdateResult> pushResponse(@RequestBody ResponseSchema response) {
 		return ResponseEntity.ok(responseSchemaService.pushResponse(response));

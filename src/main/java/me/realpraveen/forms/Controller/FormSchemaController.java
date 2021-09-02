@@ -1,6 +1,7 @@
 package me.realpraveen.forms.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ import me.realpraveen.forms.Service.FormSchemaService;
 
 @RestController
 @RequestMapping("/form")
-@CrossOrigin
+@CrossOrigin("http://localhost:3000")
 public class FormSchemaController {
 
 	FormSchemaService formSchemaService;
@@ -31,12 +32,15 @@ public class FormSchemaController {
 
 	@GetMapping
 	public ResponseEntity<List<FormSchema>> findAllFroms() {
-		return ResponseEntity.ok(formSchemaService.findAllForms());
+		List<FormSchema> form = formSchemaService.findAllForms();
+		return ResponseEntity.ok(form);
 	}
 
 	@GetMapping("/{formId}")
 	public ResponseEntity<FormSchema> findById(@PathVariable String formId) {
-		return ResponseEntity.ok(formSchemaService.findById(formId));
+		FormSchema form = formSchemaService.findById(formId);
+		boolean isNull = Optional.ofNullable(form).isEmpty();
+		return (isNull ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(form));
 	}
 
 	@PostMapping
