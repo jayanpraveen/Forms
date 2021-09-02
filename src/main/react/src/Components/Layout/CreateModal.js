@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Button, Modal, Form, Input, message } from "antd";
+import { Button, Modal, Form, Input, message, notification } from "antd";
 const { TextArea } = Input;
 
 const CreateForm = ({ visible, onCreate, onCancel }) => {
@@ -59,11 +59,14 @@ export default function CreateModal() {
     const postData = async () => {
       data.questions = {};
       await axios.post(`/form`, data).then(
-        (response) => {
-          message.success("Successfully created ✨!");
+        () => {
+          console.log("forward requesrt");
         },
-        (error) => {
-          message.error("Something wrong, try again");
+        () => {
+          notification.error({
+            message: "Error",
+            description: "Something's worng, please try again later.",
+          });
         }
       );
     };

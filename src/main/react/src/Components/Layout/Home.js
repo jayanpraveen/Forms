@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./Home.css";
+import "./css/Home.css";
 import { Divider, Layout, Menu } from "antd";
 import axios from "axios";
 import { FileOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import CreateModal from "./CreateModal";
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function Home() {
@@ -44,7 +45,9 @@ export default function Home() {
           </Menu>
         </Sider>
         <Layout className="site-layout" style={{}}>
-          <Header className="site-layout-background" style={{ padding: 0 }} />
+          <Header className="site-layout-background" style={{ padding: 0 }}>
+            <CreateModal />
+          </Header>
           <Divider />
           <Content style={{ margin: "0 16px" }}>
             <div className="site-layout-background" style={{ padding: 24 }}>
