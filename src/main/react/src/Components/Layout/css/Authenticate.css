@@ -1,0 +1,23 @@
+.card-container {
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  min-width: 200px;
+  width: 40vmax;
+  padding-top: 20vh;
+  padding-bottom: 20vh;
+  margin-left: 35vw;
+  margin-right: 35vw;
+}
+
+#login_form {
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.ant-tabs-nav-wrap {
+  text-align: center;
+  display: grid;
+  place-items: center;
+  place-content: center;
+}

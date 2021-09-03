@@ -1,10 +1,10 @@
 import React from "react";
-import Home from "./Components/Layout/Home";
+import Authenticate from "./Components/Layout/Authenticate";
 
 function App() {
   return (
     <>
-      <Home />
+      <Authenticate />
     </>
   );
 }
