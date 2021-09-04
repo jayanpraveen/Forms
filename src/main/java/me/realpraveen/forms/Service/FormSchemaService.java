@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,8 +60,19 @@ public class FormSchemaService {
 		return form;
 	}
 
-	public FormSchema updateFormSchema(String formId, FormSchema updatedfrom) {
-		return formSchemaRepository.save(updatedfrom);
+	public FormSchema updateFormSchema(String formId, @Valid FormSchema updatedForm) {
+
+		// ! handle
+		if (!formSchemaRepository.existsById(formId)) {
+			return null;
+		}
+
+		var form = formSchemaRepository.findById(formId).orElse(null);
+		form.setTitle(updatedForm.getTitle());
+		form.setAbout(updatedForm.getAbout());
+		form.setQuestions(updatedForm.getQuestions());
+
+		return formSchemaRepository.save(form);
 	}
 
 	// ! delete...
