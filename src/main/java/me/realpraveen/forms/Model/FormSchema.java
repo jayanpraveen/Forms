@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -31,13 +31,13 @@ public class FormSchema {
 	private String formId;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy@HH:mm:ss")
-	private LocalDateTime timestamp;
+	private LocalDateTime createdDateTime;
 
 	@NotBlank(message = "{validation.title.empty}")
 	private String title;
 	private String about;
 
-	@NotEmpty(message = "{validation.question.empty}")
+	@NotNull(message = "{validation.question.empty}")
 	private Map<String, String> questions;
 
 }

@@ -50,9 +50,10 @@ public class FormSchemaController {
 		return new ResponseEntity<>(formSchemaService.insertFormSchema(formSchema), HttpStatus.CREATED);
 	}
 
-	@PutMapping
-	public ResponseEntity<FormSchema> updateFormSchema(@RequestBody FormSchema formSchema) {
-		return new ResponseEntity<>(formSchemaService.updateFormSchema(formSchema), HttpStatus.OK);
+	@PutMapping("/{formId}")
+	public ResponseEntity<FormSchema> updateFormSchema(@PathVariable String formId,
+			@Valid @RequestBody FormSchema updatedForm) {
+		return new ResponseEntity<>(formSchemaService.updateFormSchema(formId, updatedForm), HttpStatus.OK);
 	}
 
 }

@@ -52,16 +52,15 @@ public class FormSchemaService {
 
 		List<HashMap<String, String>> emptyResponse = new ArrayList<HashMap<String, String>>();
 
-		formSchema.setTimestamp(LocalDateTime.now().withNano(0));
+		formSchema.setCreatedDateTime(LocalDateTime.now().withNano(0));
 		var form = formSchemaRepository.insert(formSchema);
 
 		responseSchemaRepository.insert(new ResponseSchema(form.getFormId(), emptyResponse));
 		return form;
 	}
 
-	public FormSchema updateFormSchema(FormSchema formSchema) {
-		log.info(formSchema.toString());
-		return formSchemaRepository.save(formSchema);
+	public FormSchema updateFormSchema(String formId, FormSchema updatedfrom) {
+		return formSchemaRepository.save(updatedfrom);
 	}
 
 	// ! delete...

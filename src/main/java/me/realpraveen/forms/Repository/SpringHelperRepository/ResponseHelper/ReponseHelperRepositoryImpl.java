@@ -1,4 +1,4 @@
-package me.realpraveen.forms.Repository.ResponseUtilsRepository;
+package me.realpraveen.forms.Repository.SpringHelperRepository.ResponseHelper;
 
 import com.mongodb.client.result.UpdateResult;
 
@@ -12,24 +12,23 @@ import org.springframework.stereotype.Component;
 import me.realpraveen.forms.Model.ResponseSchema;
 
 @Component
-public class ReponseRepositoryImpl implements ReponseRepository {
+public class ReponseHelperRepositoryImpl implements ReponseHelperRepository {
 
 	private MongoTemplate mongoTemplate;
 
 	@Autowired
-	public ReponseRepositoryImpl(MongoTemplate mongoTemplate) {
+	public ReponseHelperRepositoryImpl(MongoTemplate mongoTemplate) {
 		this.mongoTemplate = mongoTemplate;
 	}
 
-	public UpdateResult pushResponse(ResponseSchema response) {
-		var formId = response.getFormId();
-		Update update = new Update();
-		System.out.println(formId);
-		update.push("response", response.getResponse().get(0));
-		System.out.println(response.getResponse().get(0));
-		Criteria criteria = Criteria.where("_id").is(formId);
-		return mongoTemplate.updateFirst(Query.query(criteria), update, "ResponseSchema");
+	public UpdateResult pushResponse(String formId, ResponseSchema response) {
 
+		Update update = new Update();
+		update.push("response", response.getResponse().get(0));
+
+		Criteria criteria = Criteria.where("_id").is(formId);
+
+		return mongoTemplate.updateFirst(Query.query(criteria), update, "ResponseSchema");
 	}
 
 }

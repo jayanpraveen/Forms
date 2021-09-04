@@ -8,11 +8,13 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import me.realpraveen.forms.Model.ResponseSchema;
-import me.realpraveen.forms.Repository.ResponseUtilsRepository.ReponseRepository;
+import me.realpraveen.forms.Repository.SpringHelperRepository.ResponseHelper.ReponseHelperRepository;
 
 @Repository
-public interface ResponseSchemaRepository extends MongoRepository<ResponseSchema, String>, ReponseRepository {
+public interface ResponseSchemaRepository extends MongoRepository<ResponseSchema, String>, ReponseHelperRepository {
+
 	List<ResponseSchema> findByFormId(String formId);
 
-	UpdateResult pushResponse(ResponseSchema response);
+	UpdateResult pushResponse(String formId, ResponseSchema response);
+
 }

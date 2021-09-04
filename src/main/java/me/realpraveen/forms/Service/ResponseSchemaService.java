@@ -39,8 +39,13 @@ public class ResponseSchemaService {
 		return responseSchemaRepository.insert(response);
 	}
 
-	public UpdateResult pushResponse(ResponseSchema response) {
-		return responseSchemaRepository.pushResponse(response);
+	public UpdateResult pushResponse(String formId, ResponseSchema response) {
+
+		if (formId != null && !responseSchemaRepository.existsById(formId)) {
+			log.error("");
+		}
+
+		return responseSchemaRepository.pushResponse(formId, response);
 	}
 
 }
