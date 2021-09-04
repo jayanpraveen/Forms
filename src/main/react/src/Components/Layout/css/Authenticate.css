@@ -10,9 +10,10 @@
   margin-right: 35vw;
 }
 
-#login_form {
-  margin-left: 8%;
-  margin-right: 8%;
+#login_form,
+#reg_from {
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
 .ant-tabs-nav-wrap {

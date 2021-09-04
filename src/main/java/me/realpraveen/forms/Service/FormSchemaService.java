@@ -1,5 +1,6 @@
 package me.realpraveen.forms.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,15 +38,12 @@ public class FormSchemaService {
 
 	public FormSchema insertFormSchema(FormSchema formSchema) {
 
-		List<HashMap<String, String>> map = new ArrayList<HashMap<String, String>>();
+		List<HashMap<String, String>> emptyResponse = new ArrayList<HashMap<String, String>>();
 
+		formSchema.setTimestamp(LocalDateTime.now().withNano(0));
 		var form = formSchemaRepository.insert(formSchema);
-		String formId = form.getFormId();
-		var response = new ResponseSchema(formId, map);
-		responseSchemaRepository.insert(response);
 
-		log.info(formId);
-		log.info(response.getFormId());
+		responseSchemaRepository.insert(new ResponseSchema(form.getFormId(), emptyResponse));
 		return form;
 	}
 

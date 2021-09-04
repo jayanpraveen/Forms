@@ -1,6 +1,11 @@
 package me.realpraveen.forms.Model;
 
+import java.time.LocalDateTime;
 import java.util.Map;
+
+import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -23,6 +28,11 @@ public class FormSchema {
 	@Indexed
 	@Setter(value = AccessLevel.PROTECTED)
 	private String formId;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy@HH:mm:ss")
+	private LocalDateTime timestamp;
+
+	@NotBlank(message = "{validation.title.empty}")
 	private String title;
 	private String about;
 	private Map<String, String> questions;
