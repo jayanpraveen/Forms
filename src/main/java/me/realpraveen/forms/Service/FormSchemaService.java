@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import me.realpraveen.forms.Model.FormSchema;
 import me.realpraveen.forms.Model.ResponseSchema;
+import me.realpraveen.forms.Provider.SpringDependencyProvider;
 import me.realpraveen.forms.Repository.FormSchemaRepository;
 import me.realpraveen.forms.Repository.ResponseSchemaRepository;
 
@@ -20,12 +24,14 @@ public class FormSchemaService {
 
 	FormSchemaRepository formSchemaRepository;
 	ResponseSchemaRepository responseSchemaRepository;
+	SpringDependencyProvider provider;
 
 	@Autowired
 	public FormSchemaService(FormSchemaRepository formSchemaRepository,
-			ResponseSchemaRepository responseSchemaRepository) {
+			ResponseSchemaRepository responseSchemaRepository, SpringDependencyProvider springDependencyProvider) {
 		this.formSchemaRepository = formSchemaRepository;
 		this.responseSchemaRepository = responseSchemaRepository;
+		provider = springDependencyProvider;
 	}
 
 	public List<FormSchema> findAllForms() {
@@ -37,6 +43,11 @@ public class FormSchemaService {
 	}
 
 	public FormSchema insertFormSchema(FormSchema formSchema) {
+
+		Set<ConstraintViolation<FormSchema>> violations = provider.getValidator().validate(formSchema);
+
+		for (ConstraintViolation<FormSchema> violation : violations)
+			log.error(violation.getMessage());
 
 		List<HashMap<String, String>> emptyResponse = new ArrayList<HashMap<String, String>>();
 
