@@ -46,8 +46,9 @@ public class FormSchemaService {
 
 		Set<ConstraintViolation<FormSchema>> violations = provider.getValidator().validate(formSchema);
 
-		for (ConstraintViolation<FormSchema> violation : violations)
+		for (ConstraintViolation<FormSchema> violation : violations) {
 			log.error(violation.getMessage());
+		}
 
 		List<HashMap<String, String>> emptyResponse = new ArrayList<HashMap<String, String>>();
 

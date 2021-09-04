@@ -36,9 +36,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		// ! change this : invalid field type
-		String error = "Field should be type of TYPE";
-		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+		Throwable mostSpecificCause = ex.getMostSpecificCause();
+		ApiError apiError;
+
+		if (mostSpecificCause != null) {
+			String error = mostSpecificCause.getClass().getName();
+			String message = mostSpecificCause.getLocalizedMessage();
+			apiError = new ApiError(HttpStatus.BAD_REQUEST, message, error);
+		} else {
+			apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage());
+		}
+
 		return new ResponseEntity<>(apiError, apiError.getStatus());
 	}
 }
