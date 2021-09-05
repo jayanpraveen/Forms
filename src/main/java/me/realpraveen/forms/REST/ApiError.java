@@ -7,6 +7,11 @@ import org.springframework.http.HttpStatus;
 
 import lombok.Getter;
 
+/**
+ * @param status  – The HTTP status code.
+ * @param message – The error message associated with exception.
+ * @param error   – List of defined error messages.
+ */
 @Getter
 public class ApiError {
 

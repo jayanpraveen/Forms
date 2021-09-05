@@ -1,7 +1,5 @@
 package me.realpraveen.forms.Controller;
 
-import java.util.List;
-
 import com.mongodb.client.result.UpdateResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import me.realpraveen.forms.DTO.ResponseDTO;
 import me.realpraveen.forms.Model.ResponseSchema;
-import me.realpraveen.forms.Service.ResponseDTOService;
 import me.realpraveen.forms.Service.ResponseSchemaService;
 
 @RestController
@@ -27,28 +24,15 @@ import me.realpraveen.forms.Service.ResponseSchemaService;
 public class ResponseSchemaController {
 
 	ResponseSchemaService responseSchemaService;
-	ResponseDTOService responseDTOService;
 
 	@Autowired
-	public ResponseSchemaController(ResponseSchemaService responseSchemaService,
-			ResponseDTOService responseDTOService) {
+	public ResponseSchemaController(ResponseSchemaService responseSchemaService) {
 		this.responseSchemaService = responseSchemaService;
-		this.responseDTOService = responseDTOService;
-	}
-
-	@GetMapping
-	public ResponseEntity<List<ResponseSchema>> findAllResposne() {
-		return ResponseEntity.ok(responseSchemaService.findAllResponse());
 	}
 
 	@GetMapping("/{formId}")
 	public ResponseEntity<ResponseDTO> getResponse(@PathVariable String formId) {
-		return ResponseEntity.ok(responseDTOService.buildResponseDTO(formId));
-	}
-
-	@GetMapping("/only/{formId}")
-	public ResponseEntity<List<ResponseSchema>> getOnlyResponse(@PathVariable String formId) {
-		return ResponseEntity.ok(responseSchemaService.getOnlyResponse(formId));
+		return ResponseEntity.ok(responseSchemaService.buildResponse(formId));
 	}
 
 	@PostMapping
