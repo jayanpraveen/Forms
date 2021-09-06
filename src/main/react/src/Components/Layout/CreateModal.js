@@ -30,6 +30,7 @@ const CreateForm = ({ visible, onCreate, onCancel }) => {
         name="form_in_modal"
         initialValues={{
           title: "Untitled Form",
+          about: "",
         }}
       >
         <Form.Item
@@ -56,13 +57,15 @@ export default function CreateModal() {
   const [visible, setVisible] = useState(false);
 
   const onCreate = (data) => {
+    console.log(data);
+
     const postData = async () => {
-      data.questions = {};
       await axios.post(`/form`, data).then(
         () => {
           console.log("forward requesrt");
         },
-        () => {
+        (err) => {
+          console.log(err.response);
           notification.error({
             message: "Error",
             description: "Something's worng, please try again later.",

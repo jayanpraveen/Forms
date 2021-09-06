@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class FormUpdatedDTO extends DataTransferObject {
+public class FormDTO extends DataTransferObject {
 
 	@NotBlank(message = "{validation.title.empty}")
 	private String title;

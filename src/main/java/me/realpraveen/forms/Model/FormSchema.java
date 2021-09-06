@@ -32,7 +32,8 @@ public class FormSchema {
 	@Setter(value = AccessLevel.PROTECTED)
 	private String formId;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy@HH:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy@HH:mm")
+	@Setter(value = AccessLevel.PROTECTED)
 	private LocalDateTime createdDateTime;
 
 	@NotBlank(message = "{validation.title.empty}")
@@ -42,4 +43,7 @@ public class FormSchema {
 	@NotNull(message = "{validation.question.empty}")
 	private Map<String, String> questions;
 
+	public FormSchema(LocalDateTime createdDateTime) {
+		this.createdDateTime = createdDateTime;
+	}
 }

@@ -7,19 +7,19 @@ import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import me.realpraveen.forms.DTO.FormUpdatedDTO;
+import me.realpraveen.forms.DTO.FormDTO;
 import me.realpraveen.forms.Model.FormSchema;
 import me.realpraveen.forms.Model.ResponseSchema;
 import me.realpraveen.forms.Provider.SpringDependencyProvider;
 import me.realpraveen.forms.Repository.FormSchemaRepository;
 import me.realpraveen.forms.Repository.ResponseSchemaRepository;
 import me.realpraveen.forms.Utils.DTOConverter;
+import me.realpraveen.forms.Utils.Notification;
 
 @Service
 @Slf4j
@@ -45,22 +45,13 @@ public class FormSchemaService {
 		return formSchemaRepository.findById(formId).orElse(null);
 	}
 
-	public FormSchema DTOtoFormEntity(FormUpdatedDTO dto) {
+	public void insertFormSchema(FormDTO dto) {
 
-		FormSchema form = new FormSchema();
-		form.setCreatedDateTime(LocalDateTime.now().withNano(0));
+		FormSchema form = new FormSchema(LocalDateTime.now().withNano(0));
 
-		form.setAbout(dto.getAbout());
-		form.setQuestions(dto.getQuestions());
+		form.setQuestions(new HashMap<String, String>());
 		form.setTitle(dto.getTitle());
-
-		return form;
-
-	}
-
-	public void insertFormSchema(FormUpdatedDTO dto) {
-
-		FormSchema form = DTOtoFormEntity(dto);
+		form.setAbout(dto.getAbout());
 
 		Set<ConstraintViolation<FormSchema>> violations = provider.getValidator().validate(form);
 
@@ -76,21 +67,34 @@ public class FormSchemaService {
 
 	}
 
-	public FormSchema updateFormSchema(String formId, @Valid FormSchema updatedForm) {
+	public void updateFormSchema(String formId, FormDTO dto) {
 
-		// ! handle
-		if (!formSchemaRepository.existsById(formId)) {
-			return null;
+		if (!doesFormExist(formId)) {
+			Notification note = new Notification();
+			note.addError("global", provider.getMessageProvider().getMessage("form.not_exist"));
+			dto.setNotification(note);
+			return;
+		}
+
+		Set<ConstraintViolation<FormDTO>> violations = provider.getValidator().validate(dto);
+
+		if (!violations.isEmpty()) {
+			dto.setNotification(DTOConverter.convertViolations(violations));
+			return;
 		}
 
 		var form = formSchemaRepository.findById(formId).orElse(null);
-		form.setTitle(updatedForm.getTitle());
-		form.setAbout(updatedForm.getAbout());
-		form.setQuestions(updatedForm.getQuestions());
 
-		return formSchemaRepository.save(form);
+		form.setTitle(dto.getTitle());
+		form.setAbout(dto.getAbout());
+		form.setQuestions(dto.getQuestions());
+
+		formSchemaRepository.save(form);
+
 	}
 
-	// ! delete...
+	public boolean doesFormExist(String formId) {
+		return (formId == null || formId == "" ? false : formSchemaRepository.existsById(formId));
+	}
 
 }

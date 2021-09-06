@@ -25,7 +25,7 @@ export default function FormSchema({ formId }) {
         })
         .catch((error) => {
           setError(error.response.status);
-          return error.response.status;
+          return error.response;
         });
 
       if (result.status === 200) {
@@ -38,7 +38,7 @@ export default function FormSchema({ formId }) {
       setLoading(false);
     };
     fetchData();
-  }, [url]);
+  }, [url, formId]);
 
   return (
     <div>
@@ -51,7 +51,11 @@ export default function FormSchema({ formId }) {
               status={error}
               title={error}
               subTitle="Sorry, the page you visited does not exist."
-              extra={<Button type="primary">Back Home</Button>}
+              extra={
+                <Button type="primary" href="/">
+                  Back Home
+                </Button>
+              }
             />
           ) : (
             <CreateForm initialValues={initialValues} formId={formId} />

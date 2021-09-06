@@ -3,8 +3,6 @@ package me.realpraveen.forms.Controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.realpraveen.forms.DTO.FormUpdatedDTO;
+import me.realpraveen.forms.DTO.FormDTO;
 import me.realpraveen.forms.Model.FormSchema;
 import me.realpraveen.forms.Service.FormSchemaService;
 import me.realpraveen.forms.Utils.Notification;
@@ -48,22 +46,25 @@ public class FormSchemaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Notification> insertFormSchema(@RequestBody FormUpdatedDTO formSchema) {
+	public ResponseEntity<Notification> insertFormSchema(@RequestBody FormDTO form) {
 
-		formSchemaService.insertFormSchema(formSchema);
-		var note = formSchema.getNotification();
+		formSchemaService.insertFormSchema(form);
+		var note = form.getNotification();
 
-		if (note.hasErrors()) {
-			return new ResponseEntity<>(note, HttpStatus.BAD_REQUEST);
-		}
+		return (note.hasErrors() ? new ResponseEntity<>(note, HttpStatus.BAD_REQUEST)
+				: new ResponseEntity<>(note, HttpStatus.CREATED));
 
-		return new ResponseEntity<>(note, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{formId}")
-	public ResponseEntity<FormSchema> updateFormSchema(@PathVariable String formId,
-			@Valid @RequestBody FormSchema updatedForm) {
-		return new ResponseEntity<>(formSchemaService.updateFormSchema(formId, updatedForm), HttpStatus.OK);
+	public ResponseEntity<Notification> updateFormSchema(@PathVariable String formId, @RequestBody FormDTO form) {
+
+		formSchemaService.updateFormSchema(formId, form);
+		var note = form.getNotification();
+
+		return (note.hasErrors() ? new ResponseEntity<>(note, HttpStatus.BAD_REQUEST)
+				: new ResponseEntity<>(note, HttpStatus.OK));
+
 	}
 
 }

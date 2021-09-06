@@ -27,7 +27,7 @@ export default function CreateForm({ formId, initialValues }) {
         <TextArea
           bordered={false}
           placeholder="Form description"
-          autoSize={{ minRows: 3 }}
+          autoSize={{ minRows: 1 }}
         />
       </Form.Item>
     );
@@ -35,7 +35,6 @@ export default function CreateForm({ formId, initialValues }) {
   const [form] = Form.useForm();
 
   const onFinish = (data) => {
-    // console.log(data);
     let payload = {
       formId: formId,
       title: data.title,
@@ -47,10 +46,8 @@ export default function CreateForm({ formId, initialValues }) {
       payload.questions[i] = data.questions[i];
     }
 
-    // console.log(payload);
     axios.put(`/form/${formId}`, payload).then(
       (response) => {
-        // console.log(response.data);
         message.success("Saved successfully!");
       },
       (error) => {

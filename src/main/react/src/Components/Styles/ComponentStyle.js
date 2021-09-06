@@ -3,7 +3,7 @@ const cardStyle = {
   display: "flex",
   justifyContent: "center",
   width: "560px",
-  padding: "10px",
+  padding: "4px",
   flexDirection: "column",
   border: "1.5px solid #dadce0",
   wordWrap: "breakWord",
@@ -24,7 +24,7 @@ const listStyle = {
 
 const headerStripeStyle = {
   color: "#fff",
-  backgroundColor: "#6739B7",
+  backgroundColor: "#357ef3",
   borderTopLeftRadius: "8px",
   borderTopRightRadius: "10px",
   height: "10px",

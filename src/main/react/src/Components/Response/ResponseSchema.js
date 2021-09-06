@@ -44,7 +44,7 @@ export default function ResponseSchema({ formId }) {
 
   const Response = ({ APIData }) => (
     <div>
-      <TitleField title={APIData.title} about={APIData.about} />
+      <TitleField title={<>APIData.title</>} about={APIData.about} />
       <Divider style={{ padding: "0px", margin: "8px" }} />
       <Form onFinish={onFinish} style={listStyle}>
         <Space direction="vertical">
