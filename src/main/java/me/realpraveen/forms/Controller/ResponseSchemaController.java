@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.realpraveen.forms.DTO.ResponseDTO;
+import me.realpraveen.forms.DTO.ResponseGetDTO;
 import me.realpraveen.forms.Model.ResponseSchema;
 import me.realpraveen.forms.Service.ResponseSchemaService;
 
@@ -31,7 +31,7 @@ public class ResponseSchemaController {
 	}
 
 	@GetMapping("/{formId}")
-	public ResponseEntity<ResponseDTO> getResponse(@PathVariable String formId) {
+	public ResponseEntity<ResponseGetDTO> getResponse(@PathVariable String formId) {
 		return ResponseEntity.ok(responseSchemaService.buildResponse(formId));
 	}
 

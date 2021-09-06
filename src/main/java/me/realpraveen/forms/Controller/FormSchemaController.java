@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import me.realpraveen.forms.DTO.FormUpdatedDTO;
 import me.realpraveen.forms.Model.FormSchema;
 import me.realpraveen.forms.Service.FormSchemaService;
+import me.realpraveen.forms.Utils.Notification;
 
 @RestController
 @RequestMapping("/form")
@@ -46,8 +48,16 @@ public class FormSchemaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<FormSchema> insertFormSchema(@Valid @RequestBody FormSchema formSchema) {
-		return new ResponseEntity<>(formSchemaService.insertFormSchema(formSchema), HttpStatus.CREATED);
+	public ResponseEntity<Notification> insertFormSchema(@RequestBody FormUpdatedDTO formSchema) {
+
+		formSchemaService.insertFormSchema(formSchema);
+		var note = formSchema.getNotification();
+
+		if (note.hasErrors()) {
+			return new ResponseEntity<>(note, HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<>(note, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/{formId}")

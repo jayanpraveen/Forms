@@ -1,4 +1,4 @@
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined, SmileOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import React from "react";
 
@@ -14,13 +14,17 @@ export default function Login() {
           name="email"
           rules={[
             {
-              type: "email",
+              type: "string",
               required: true,
-              message: "Please enter your email!",
+              message: "Please enter your username",
             },
           ]}
         >
-          <Input prefix={<UserOutlined />} type="email" placeholder="Email" />
+          <Input
+            prefix={<SmileOutlined />}
+            type="text"
+            placeholder="Username"
+          />
         </Form.Item>
         <Form.Item
           name="password"
@@ -28,7 +32,7 @@ export default function Login() {
             {
               type: "string",
               required: true,
-              message: "Please enter your Password!",
+              message: "Please enter your Password",
             },
           ]}
         >

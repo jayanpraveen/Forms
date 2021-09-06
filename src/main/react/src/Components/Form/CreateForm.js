@@ -35,7 +35,7 @@ export default function CreateForm({ formId, initialValues }) {
   const [form] = Form.useForm();
 
   const onFinish = (data) => {
-    console.log(data);
+    // console.log(data);
     let payload = {
       formId: formId,
       title: data.title,
@@ -47,15 +47,15 @@ export default function CreateForm({ formId, initialValues }) {
       payload.questions[i] = data.questions[i];
     }
 
-    console.log(payload);
-    axios.put(`/form`, payload).then(
+    // console.log(payload);
+    axios.put(`/form/${formId}`, payload).then(
       (response) => {
-        console.log(response.data);
+        // console.log(response.data);
         message.success("Saved successfully!");
       },
       (error) => {
-        console.log(error);
-        message.error("Something wrong, try again");
+        console.log(error.response.data.errors);
+        message.error(error.response.data.errors);
       }
     );
   };

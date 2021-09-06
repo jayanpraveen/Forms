@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import me.realpraveen.forms.DTO.ResponseDTO;
+import me.realpraveen.forms.DTO.ResponseGetDTO;
 import me.realpraveen.forms.Model.FormSchema;
 import me.realpraveen.forms.Model.ResponseSchema;
 import me.realpraveen.forms.Provider.SpringDependencyProvider;
@@ -50,7 +50,7 @@ public class ResponseSchemaService {
 
 	}
 
-	public ResponseDTO buildResponse(String formId) {
+	public ResponseGetDTO buildResponse(String formId) {
 
 		if (doesResponseExist(formId)) {
 			log.error(provider.getMessageProvider().getMessage("validation.response.not_exist"));
@@ -63,7 +63,7 @@ public class ResponseSchemaService {
 		var responses = responseRepository.findByFormId(formId).stream().map(ResponseSchema::getResponse).iterator()
 				.next();
 
-		return ResponseDTO.builder().title(title).questions(questions).response(responses).build();
+		return ResponseGetDTO.builder().title(title).questions(questions).response(responses).build();
 	}
 
 	public boolean doesResponseExist(String formId) {

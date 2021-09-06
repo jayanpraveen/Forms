@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class ResponseDTO {
+public class ResponseGetDTO {
 
 	private String title;
 	private Map<String, String> questions;

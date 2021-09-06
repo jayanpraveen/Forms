@@ -13,11 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import me.realpraveen.forms.DTO.FormUpdatedDTO;
 import me.realpraveen.forms.Model.FormSchema;
 import me.realpraveen.forms.Model.ResponseSchema;
 import me.realpraveen.forms.Provider.SpringDependencyProvider;
 import me.realpraveen.forms.Repository.FormSchemaRepository;
 import me.realpraveen.forms.Repository.ResponseSchemaRepository;
+import me.realpraveen.forms.Utils.DTOConverter;
 
 @Service
 @Slf4j
@@ -43,21 +45,35 @@ public class FormSchemaService {
 		return formSchemaRepository.findById(formId).orElse(null);
 	}
 
-	public FormSchema insertFormSchema(FormSchema formSchema) {
+	public FormSchema DTOtoFormEntity(FormUpdatedDTO dto) {
 
-		Set<ConstraintViolation<FormSchema>> violations = provider.getValidator().validate(formSchema);
+		FormSchema form = new FormSchema();
+		form.setCreatedDateTime(LocalDateTime.now().withNano(0));
 
-		for (ConstraintViolation<FormSchema> violation : violations) {
-			log.error(violation.getMessage());
+		form.setAbout(dto.getAbout());
+		form.setQuestions(dto.getQuestions());
+		form.setTitle(dto.getTitle());
+
+		return form;
+
+	}
+
+	public void insertFormSchema(FormUpdatedDTO dto) {
+
+		FormSchema form = DTOtoFormEntity(dto);
+
+		Set<ConstraintViolation<FormSchema>> violations = provider.getValidator().validate(form);
+
+		violations.stream().forEach(error -> log.error(error.getMessage()));
+
+		if (!violations.isEmpty()) {
+			dto.setNotification(DTOConverter.convertViolations(violations));
+			return;
 		}
 
-		List<HashMap<String, String>> emptyResponse = new ArrayList<HashMap<String, String>>();
+		formSchemaRepository.insert(form);
+		responseSchemaRepository.insert(new ResponseSchema(form.getFormId(), new ArrayList<HashMap<String, String>>()));
 
-		formSchema.setCreatedDateTime(LocalDateTime.now().withNano(0));
-		var form = formSchemaRepository.insert(formSchema);
-
-		responseSchemaRepository.insert(new ResponseSchema(form.getFormId(), emptyResponse));
-		return form;
 	}
 
 	public FormSchema updateFormSchema(String formId, @Valid FormSchema updatedForm) {
