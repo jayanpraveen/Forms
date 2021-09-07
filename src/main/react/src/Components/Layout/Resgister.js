@@ -52,7 +52,7 @@ export default function Register() {
             {
               type: "string",
               required: true,
-              message: "Please enter password",
+              message: "Please re-enter password",
             },
           ]}
         >
@@ -64,7 +64,7 @@ export default function Register() {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" className="login-button">
-            Log in
+            Sign up
           </Button>
         </Form.Item>
       </Form>

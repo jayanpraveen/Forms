@@ -3,7 +3,7 @@ import "../css/AddButton.css";
 import { Tooltip, Tag } from "antd";
 import { PlusCircleTwoTone } from "@ant-design/icons";
 
-function AddButton({ add }) {
+function AddButton({ add, setState }) {
   return (
     <>
       <Tooltip
@@ -22,7 +22,13 @@ function AddButton({ add }) {
             justifyContent: "center",
           }}
         >
-          <PlusCircleTwoTone className="AddButton" onClick={() => add()} />
+          <PlusCircleTwoTone
+            className="AddButton"
+            onClick={() => {
+              add();
+              setState(Math.random());
+            }}
+          />
         </div>
       </Tooltip>
     </>

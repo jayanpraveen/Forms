@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./css/Home.css";
-import { Divider, Layout, Menu } from "antd";
+import { Divider, Layout, Menu, Row, Col, Card, PageHeader } from "antd";
 import axios from "axios";
 import { FileOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import CreateModal from "./CreateModal";
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 export default function Home() {
   const [collapsed, setCollapsed] = useState(false);
@@ -20,6 +20,8 @@ export default function Home() {
     fetchData();
   }, [url]);
   console.log(APIData);
+
+  const downStyle = {};
 
   return (
     <>
@@ -39,21 +41,41 @@ export default function Home() {
             <Menu.Item key="2" icon={<FileOutlined />}>
               Forms
             </Menu.Item>
-            <Menu.Item key="3" icon={<LogoutOutlined />}>
+            <Menu.Item style={downStyle} key="3" icon={<LogoutOutlined />}>
               Log out
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout className="site-layout" style={{}}>
-          <Header className="site-layout-background" style={{ padding: 0 }}>
-            <CreateModal />
-          </Header>
-          <Divider />
+        <Layout className="site-layout">
+          <>
+            <PageHeader
+              ghost={false}
+              title={"Hello, user"}
+              extra={[<CreateModal />]}
+            />
+          </>
+          <Divider orientation="left">Created Forms</Divider>
           <Content style={{ margin: "0 16px" }}>
             <div className="site-layout-background" style={{ padding: 24 }}>
-              {APIData.map((item) => (
-                <div key={item}>{item}</div>
-              ))}
+              <Row justify="space-between" gutter={[42, 24]}>
+                {APIData.map((item) => (
+                  <Col
+                    key={item}
+                    xs={24}
+                    lg={24 / 4}
+                    className="gutter-row"
+                    span={4}
+                  >
+                    <div style={style}>
+                      <Card hoverable title={item} style={{ cursor: "auto" }}>
+                        <a>{"edit "}</a>
+                        <a>{"view "}</a>
+                        <a>{"response "}</a>
+                      </Card>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
@@ -64,3 +86,4 @@ export default function Home() {
     </>
   );
 }
+const style = {};

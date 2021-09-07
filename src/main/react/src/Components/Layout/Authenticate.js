@@ -17,6 +17,7 @@ export default function Authenticate() {
     <>
       <div className="card-container">
         <Card
+          style={{ cursor: "auto" }}
           hoverable
           className="card"
           title={<h2>{tab}</h2>}

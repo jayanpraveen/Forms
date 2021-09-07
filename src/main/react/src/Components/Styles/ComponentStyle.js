@@ -18,8 +18,9 @@ const cardHead = {
 };
 
 const listStyle = {
-  display: "flex",
-  justifyContent: "center",
+  display: "grid",
+  alignItems: "center",
+  placeItems: "center",
 };
 
 const headerStripeStyle = {

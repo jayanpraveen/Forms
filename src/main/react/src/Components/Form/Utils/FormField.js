@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
 import { DeleteTwoTone } from "@ant-design/icons";
-import { Card, Form, Input, List, Tooltip, Tag } from "antd";
+import { Card, Form, Input, List, Tag, Tooltip } from "antd";
+import React, { useEffect, useRef, useState } from "react";
 import { cardBody, cardHead, cardStyle } from "../../Styles/ComponentStyle";
 import AddButton from "./AddButton";
 import FormHeaderField from "./FormHeaderField";
@@ -11,7 +11,24 @@ const deleteIconStyle = {
 };
 
 export default function FormField({ style }) {
-  const inputRef = useRef(null);
+  const scrollRef = useRef(null);
+  const fosRef = useRef(null);
+  const [state, setState] = useState(null);
+
+  useEffect(() => {
+    if (state !== null) {
+      onAddFocus();
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [state]);
+
+  const onDeleteFocus = (key) => {
+    document.getElementById(`dync_form_questions_${key}`).focus();
+  };
+  const onAddFocus = () => {
+    fosRef.current.focus();
+  };
+
   return (
     <div style={style}>
       <Form.List name="questions">
@@ -24,10 +41,12 @@ export default function FormField({ style }) {
                   if (e.key === "j" && e.metaKey) {
                     e.preventDefault();
                     add();
+                    setState(Math.random());
                   }
                   if (e.key === "k" && e.metaKey) {
                     e.preventDefault();
                     remove(name);
+                    onDeleteFocus(name - 1);
                   }
                 }}
               >
@@ -39,7 +58,7 @@ export default function FormField({ style }) {
                     size="small"
                     title={
                       <FormHeaderField
-                        ref={inputRef}
+                        ref={fosRef}
                         restField={restField}
                         name={name}
                         fieldKey={fieldKey}
@@ -68,7 +87,10 @@ export default function FormField({ style }) {
                           <DeleteTwoTone
                             style={deleteIconStyle}
                             twoToneColor="crimson"
-                            onClick={() => remove(name)}
+                            onClick={() => {
+                              remove(name);
+                              onDeleteFocus(name - 1);
+                            }}
                           />
                         ) : (
                           <div style={{ marginTop: "45px" }} />
@@ -80,11 +102,12 @@ export default function FormField({ style }) {
               </div>
             ))}
             <Form.Item>
-              <AddButton add={add} />
+              <AddButton setState={setState} add={add} />
             </Form.Item>
           </div>
         )}
       </Form.List>
+      <div ref={scrollRef} />
     </div>
   );
 }

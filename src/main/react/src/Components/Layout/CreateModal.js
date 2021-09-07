@@ -3,7 +3,7 @@ import axios from "axios";
 import { Button, Modal, Form, Input, message, notification } from "antd";
 const { TextArea } = Input;
 
-const CreateForm = ({ visible, onCreate, onCancel }) => {
+const Details = ({ visible, onCreate, onCancel }) => {
   const [form] = Form.useForm();
   return (
     <Modal
@@ -79,7 +79,7 @@ export default function CreateModal() {
 
   return (
     <>
-      <div>
+      <span className="Jollyl">
         <Button
           type="primary"
           onClick={() => {
@@ -88,16 +88,16 @@ export default function CreateModal() {
         >
           New Form
         </Button>
-      </div>
-      <div>
-        <CreateForm
+      </span>
+      <>
+        <Details
           visible={visible}
           onCreate={onCreate}
           onCancel={() => {
             setVisible(false);
           }}
         />
-      </div>
+      </>
     </>
   );
 }

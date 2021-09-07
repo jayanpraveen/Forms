@@ -1,4 +1,12 @@
-import { Divider, Form, Input, message, Space } from "antd";
+import {
+  Divider,
+  Form,
+  Input,
+  message,
+  Space,
+  BackTop,
+  Typography,
+} from "antd";
 import axios from "axios";
 import React from "react";
 import { listStyle } from "../Styles/ComponentStyle";
@@ -7,6 +15,7 @@ import "./css/SiteHeader.css";
 import FormField from "./Utils/FormField";
 import SiteHeader from "./Utils/SiteHeader";
 const { TextArea } = Input;
+const { Text } = Typography;
 
 export default function CreateForm({ formId, initialValues }) {
   const Title = () => {
@@ -80,6 +89,7 @@ export default function CreateForm({ formId, initialValues }) {
 
   return (
     <>
+      <BackTop visibilityHeight="20" />
       <div onKeyDown={saveKey}>
         <Form
           onSubmit={(e) => {
@@ -91,14 +101,10 @@ export default function CreateForm({ formId, initialValues }) {
           initialValues={initialValues}
           layout="vertical"
         >
+          <div className="site-page-wrapper">
+            <SiteHeader formId={formId} title="batman begins" />
+          </div>
           <Space style={listStyle} direction="vertical">
-            <div className="site-page-wrapper">
-              <SiteHeader
-                copyText={formId}
-                title="batman begins"
-                subTitle="the movie"
-              />
-            </div>
             <Divider style={{ margin: "48px" }} />
             <TitleField
               title={<Title />}
@@ -108,6 +114,9 @@ export default function CreateForm({ formId, initialValues }) {
             <FormField style={listStyle} />
           </Space>
         </Form>
+        <Divider>
+          <Text type="secondary">End of Page</Text>
+        </Divider>
       </div>
     </>
   );
