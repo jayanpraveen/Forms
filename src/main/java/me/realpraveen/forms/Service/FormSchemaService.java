@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -49,7 +50,11 @@ public class FormSchemaService {
 
 		FormSchema form = new FormSchema(LocalDateTime.now().withNano(0));
 
-		form.setQuestions(new HashMap<String, String>());
+		Map<String, String> initailValue = new HashMap<String, String>();
+
+		initailValue.put("0", "inital question");
+
+		form.setQuestions(initailValue);
 		form.setTitle(dto.getTitle());
 		form.setAbout(dto.getAbout());
 

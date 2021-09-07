@@ -3,7 +3,7 @@ import { Button, Tooltip, Tag } from "antd";
 
 export default function SubmitButton({ placement, value }) {
   return (
-    <div style={{ padding: "0px", paddingLeft: "15px" }}>
+    <span style={{ padding: "0px", paddingLeft: "15px" }}>
       <Tooltip
         mouseEnterDelay="0.5"
         placement={placement}
@@ -19,6 +19,6 @@ export default function SubmitButton({ placement, value }) {
           {value}
         </Button>
       </Tooltip>
-    </div>
+    </span>
   );
 }

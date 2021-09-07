@@ -1,16 +1,21 @@
 import React from "react";
-import Authenticate from "./Components/Layout/Authenticate";
+import Home from "./Components/Layout/Home";
 import FormSchema from "./Components/Form/FormSchema";
+import Authenticate from "./Components/Layout/Authenticate";
 import ResponseSchema from "./Components/Response/ResponseSchema";
-import CreateModal from "./Components/Layout/CreateModal";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
     <>
-      {/* <Authenticate /> */}
-      {/* <CreateModal /> */}
-      <FormSchema formId="6135db5f5773d30bd0c53b4c" />
-      {/* <ResponseSchema formId="6135db5f5773d30bd0c53b4c" /> */}
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Authenticate} />
+          <Route path="/home" exact component={Home} />
+          <Route path="/form/:formId/edit" component={FormSchema} />
+          <Route path="/form/:formId/view" component={ResponseSchema} />
+        </Switch>
+      </Router>
     </>
   );
 }

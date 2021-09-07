@@ -3,8 +3,11 @@ import axios from "axios";
 import CreateForm from "./CreateForm";
 import LoadingButton from "../Utils/LoadingButton";
 import { Result, Button } from "antd";
+import { useParams } from "react-router";
 
-export default function FormSchema({ formId }) {
+export default function FormSchema() {
+  const { formId } = useParams();
+  console.log(formId);
   const [Loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [initialValues, setInitialValues] = useState({

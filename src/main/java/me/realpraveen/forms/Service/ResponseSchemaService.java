@@ -43,7 +43,7 @@ public class ResponseSchemaService {
 	public UpdateResult pushResponse(String formId, ResponseSchema response) {
 
 		if (doesResponseExist(formId)) {
-			log.error(provider.getMessageProvider().getMessage("validation.response.not_exist"));
+			log.error(provider.getMessageProvider().getMessage("response.not_exist"));
 		}
 
 		return responseRepository.pushResponse(formId, response);
@@ -53,7 +53,7 @@ public class ResponseSchemaService {
 	public ResponseGetDTO buildResponse(String formId) {
 
 		if (doesResponseExist(formId)) {
-			log.error(provider.getMessageProvider().getMessage("validation.response.not_exist"));
+			log.error(provider.getMessageProvider().getMessage("response.not_exist"));
 			// and below statements
 		}
 
@@ -67,10 +67,7 @@ public class ResponseSchemaService {
 	}
 
 	public boolean doesResponseExist(String formId) {
-		if (formId != null && !responseRepository.existsById(formId)) {
-			return false;
-		}
-		return true;
+		return (formId == null || formId == "" ? false : responseRepository.existsById(formId));
 	}
 
 }

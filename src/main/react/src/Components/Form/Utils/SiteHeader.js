@@ -1,25 +1,42 @@
-import { PageHeader, Descriptions, Tag, Button } from "antd";
+import "../css/SiteHeader.css";
+import { PageHeader, Typography, Button, message } from "antd";
+import { CopyTwoTone } from "@ant-design/icons";
 import React from "react";
 import SubmitButton from "../../Utils/SubmitButton";
-import "../css/SiteHeader.css";
-/**
- *  TODO: add icons
- */
-export default function SiteHeader({ title, subTitle }) {
+const { Text } = Typography;
+
+export default function SiteHeader({ copyText, title, subTitle }) {
+  // * replace localhost with axios.defaults.baseURL in production.
+
+  const link = `localhost:3000/form/${copyText}/view`;
+
+  const copyTo = {
+    text: link,
+    tooltips: false,
+    onCopy: () => message.success("Link copied to clipboard 📋"),
+    icon: [
+      <Button icon={<CopyTwoTone />} type="primary" value="COPY">
+        Copy
+      </Button>,
+      <Button icon={<CopyTwoTone />} type="primary" value="COPY">
+        Copy
+      </Button>,
+    ],
+  };
+
   return (
     <>
       <PageHeader
         onBack={() => null}
         title={title}
         subTitle={subTitle}
-        extra={[<SubmitButton key="save" placement="bottom" value={"Save"} />]}
-      >
-        {/* <Descriptions size="small" column={3}>
-          <Descriptions.Item label="Creation Time">
-            2017-01-10
-          </Descriptions.Item>
-        </Descriptions> */}
-      </PageHeader>
+        extra={[
+          <span key="copy">
+            Copy link: <Text copyable={copyTo} />
+          </span>,
+          <SubmitButton key="save" placement="bottom" value={"Save"} />,
+        ]}
+      ></PageHeader>
     </>
   );
 }

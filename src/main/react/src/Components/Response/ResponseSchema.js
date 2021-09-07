@@ -1,13 +1,12 @@
-import { Divider, Form, Space, message } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { listStyle } from "../Styles/ComponentStyle";
-import SubmitButton from "../Utils/SubmitButton";
-import TitleField from "../Utils/TitleField";
-import ReponseField from "./Utils/ResponseField";
+import { useParams } from "react-router-dom";
 import LoadingButton from "../Utils/LoadingButton";
+import SubmitResponse from "./SubmitResponse";
 
-export default function ResponseSchema({ formId }) {
+export default function ResponseSchema() {
+  const { formId } = useParams();
+
   const [APIData, setAPIData] = useState({ questions: {} });
   const [Loading, setLoading] = useState(true);
 
@@ -22,37 +21,13 @@ export default function ResponseSchema({ formId }) {
     fetchData();
   }, [setAPIData, url]);
 
-  const onFinish = (values) => {
-    let payload = {
-      formId: formId,
-      response: [values],
-    };
-
-    console.log(payload);
-
-    axios.put(`/res/${formId}`, payload).then(
-      (response) => {
-        console.log(response.data);
-        message.success("Saved successfully!");
-      },
-      (error) => {
-        console.log(error);
-        message.error("Something wrong, try again");
-      }
-    );
-  };
-
-  const Response = ({ APIData }) => (
-    <div>
-      <TitleField title={<>APIData.title</>} about={APIData.about} />
-      <Divider style={{ padding: "0px", margin: "8px" }} />
-      <Form onFinish={onFinish} style={listStyle}>
-        <Space direction="vertical">
-          <ReponseField APIData={APIData} />
-          <SubmitButton value={"Submit"} />
-        </Space>
-      </Form>
-    </div>
+  return (
+    <>
+      {Loading ? (
+        <LoadingButton />
+      ) : (
+        <SubmitResponse formId={formId} APIData={APIData} />
+      )}
+    </>
   );
-  return <>{Loading ? <LoadingButton /> : <Response APIData={APIData} />}</>;
 }

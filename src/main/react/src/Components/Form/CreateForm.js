@@ -1,4 +1,4 @@
-import { Form, message, Space, Divider, Input } from "antd";
+import { Divider, Form, Input, message, Space } from "antd";
 import axios from "axios";
 import React from "react";
 import { listStyle } from "../Styles/ComponentStyle";
@@ -11,8 +11,11 @@ const { TextArea } = Input;
 export default function CreateForm({ formId, initialValues }) {
   const Title = () => {
     return (
-      <Form.Item name="title">
+      <Form.Item name="title" style={{ margin: "0px" }}>
         <Input
+          onKeyPress={(e) => {
+            e.key === "Enter" && e.preventDefault();
+          }}
           onBlur={onChange}
           bordered={false}
           style={{ fontSize: "28px" }}
@@ -32,6 +35,7 @@ export default function CreateForm({ formId, initialValues }) {
       </Form.Item>
     );
   };
+
   const [form] = Form.useForm();
 
   const onFinish = (data) => {
@@ -58,7 +62,6 @@ export default function CreateForm({ formId, initialValues }) {
   };
 
   const onChange = (e) => {
-    saveKey(e);
     if (e.target.value === "") {
       message.warning("Title cannot be empty");
       form.setFieldsValue({
@@ -79,6 +82,9 @@ export default function CreateForm({ formId, initialValues }) {
     <>
       <div onKeyDown={saveKey}>
         <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
           form={form}
           name="dync_form"
           onFinish={onFinish}
@@ -87,7 +93,11 @@ export default function CreateForm({ formId, initialValues }) {
         >
           <Space style={listStyle} direction="vertical">
             <div className="site-page-wrapper">
-              <SiteHeader title="batman begins" subTitle="the movie" />
+              <SiteHeader
+                copyText={formId}
+                title="batman begins"
+                subTitle="the movie"
+              />
             </div>
             <Divider style={{ margin: "48px" }} />
             <TitleField

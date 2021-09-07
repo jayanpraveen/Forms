@@ -64,11 +64,15 @@ export default function FormField({ style }) {
                         }
                         color={"#fff"}
                       >
-                        <DeleteTwoTone
-                          style={deleteIconStyle}
-                          twoToneColor="crimson"
-                          onClick={() => remove(name)}
-                        />
+                        {key > 0 ? (
+                          <DeleteTwoTone
+                            style={deleteIconStyle}
+                            twoToneColor="crimson"
+                            onClick={() => remove(name)}
+                          />
+                        ) : (
+                          <div style={{ marginTop: "45px" }} />
+                        )}
                       </Tooltip>
                     </span>
                   </Card>
