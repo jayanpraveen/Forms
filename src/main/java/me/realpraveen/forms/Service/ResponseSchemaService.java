@@ -9,35 +9,25 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import me.realpraveen.forms.DTO.ResponseGetDTO;
-import me.realpraveen.forms.Model.FormSchema;
 import me.realpraveen.forms.Model.ResponseSchema;
 import me.realpraveen.forms.Provider.SpringDependencyProvider;
-import me.realpraveen.forms.Repository.FormSchemaRepository;
 import me.realpraveen.forms.Repository.ResponseSchemaRepository;
+import me.realpraveen.forms.Utils.Notification;
 
 @Service
 @Slf4j
 public class ResponseSchemaService {
 
-	ResponseSchemaRepository responseRepository;
-	FormSchemaRepository formRepository;
-	SpringDependencyProvider provider;
+	private ResponseSchemaRepository responseRepository;
+	private SpringDependencyProvider provider;
+	private ServiceHelper helper;
 
 	@Autowired
-	public ResponseSchemaService(ResponseSchemaRepository responseRepository, FormSchemaRepository formRepository,
-			SpringDependencyProvider provider) {
+	public ResponseSchemaService(ResponseSchemaRepository responseRepository, SpringDependencyProvider provider,
+			ServiceHelper helper) {
 		this.responseRepository = responseRepository;
-		this.formRepository = formRepository;
 		this.provider = provider;
-	}
-
-	public ResponseSchema findById(String id) {
-		return responseRepository.findById(id).orElse(null);
-	}
-
-	public ResponseSchema insertResponseSchema(ResponseSchema response) {
-		log.info(response.getResponse().toString());
-		return responseRepository.insert(response);
+		this.helper = helper;
 	}
 
 	public UpdateResult pushResponse(String formId, ResponseSchema response) {
@@ -50,20 +40,32 @@ public class ResponseSchemaService {
 
 	}
 
-	public ResponseGetDTO buildResponse(String formId) {
+	public ResponseGetDTO getResponse(String formId) {
 
-		if (doesResponseExist(formId)) {
-			log.error(provider.getMessageProvider().getMessage("response.not_exist"));
-			// and below statements
+		Notification note = new Notification();
+		ResponseGetDTO dto = new ResponseGetDTO();
+
+		if (!doesResponseExist(formId)) {
+			note.addError("global", provider.getMessageProvider().getMessage("response.not_exist"));
+			dto.setNotification(note);
+			return dto;
 		}
 
-		FormSchema form = formRepository.findById(formId).orElse(null);
+		var form = helper.getFormService().findById(formId);
+
+		if (form == null) {
+			note.addError("global", provider.getMessageProvider().getMessage("form.not_exist"));
+			dto.appendNotfication(note);
+			return dto;
+		}
+
 		String title = form.getTitle();
 		Map<String, String> questions = form.getQuestions();
 		var responses = responseRepository.findByFormId(formId).stream().map(ResponseSchema::getResponse).iterator()
 				.next();
 
 		return ResponseGetDTO.builder().title(title).questions(questions).response(responses).build();
+
 	}
 
 	public boolean doesResponseExist(String formId) {

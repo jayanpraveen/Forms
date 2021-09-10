@@ -32,7 +32,7 @@ public class FormSchema {
 	@Setter(value = AccessLevel.PROTECTED)
 	private String formId;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy@HH:mm")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy @ HH:mm")
 	@Setter(value = AccessLevel.PROTECTED)
 	private LocalDateTime createdDateTime;
 

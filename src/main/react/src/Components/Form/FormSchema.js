@@ -9,7 +9,7 @@ export default function FormSchema() {
   const { formId } = useParams();
   console.log(formId);
   const [Loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const [initialValues, setInitialValues] = useState({
     title: "Untitled Form",
     about: "",
@@ -23,10 +23,11 @@ export default function FormSchema() {
       let result = await axios
         .get(url)
         .then((data) => {
-          setError("");
+          setError(null);
           return data;
         })
         .catch((error) => {
+          console.log(error.response);
           setError(error.response.status);
           return error.response;
         });

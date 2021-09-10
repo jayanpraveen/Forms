@@ -53,22 +53,17 @@ const Details = ({ visible, onCreate, onCancel }) => {
   );
 };
 
-export default function CreateModal() {
+export default function CreateModal({ refresh }) {
   const [visible, setVisible] = useState(false);
 
   const onCreate = (data) => {
-    console.log(data);
-
     const postData = async () => {
       await axios.post(`/form`, data).then(
-        () => {
-          console.log("forward requesrt");
-        },
+        () => refresh({}),
         (err) => {
-          console.log(err.response);
           notification.error({
             message: "Error",
-            description: "Something's worng, please try again later.",
+            description: err.response.data.errors,
           });
         }
       );
@@ -79,7 +74,7 @@ export default function CreateModal() {
 
   return (
     <>
-      <span className="Jollyl">
+      <span>
         <Button
           type="primary"
           onClick={() => {

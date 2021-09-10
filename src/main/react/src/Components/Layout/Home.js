@@ -1,89 +1,74 @@
-import React, { useState, useEffect } from "react";
-import "./css/Home.css";
-import { Divider, Layout, Menu, Row, Col, Card, PageHeader } from "antd";
+import { BackTop, Col, Divider, Layout, PageHeader, Row } from "antd";
 import axios from "axios";
-import { FileOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import CreateModal from "./CreateModal";
-const { Content, Footer, Sider } = Layout;
+import React, { useEffect, useState } from "react";
+import "./css/Home.css";
+import CreateModal from "./Utils/CreateModal";
+import SideDrawer from "./Utils/Drawer";
+import FormCard from "./Utils/FormCard";
+const { Content } = Layout;
 
 export default function Home() {
-  const [collapsed, setCollapsed] = useState(false);
-
-  const url = "/form";
+  const [refresh, setRefresh] = useState();
   const [APIData, setAPIData] = useState([]);
+  const url = "/form";
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(url);
-      const arr = result.data.map((item) => item.formId);
-      setAPIData(arr);
+      setAPIData(result.data);
     };
     fetchData();
-  }, [url]);
-  console.log(APIData);
-
-  const downStyle = {};
+  }, [url, refresh]);
 
   return (
     <>
-      <Layout style={{ minHeight: "100vh" }}>
-        <Sider
-          theme="dark"
-          collapsible
-          collapsed={collapsed}
-          onCollapse={() => setCollapsed(!collapsed)}
-          width="225"
+      <BackTop />
+      <Layout style={background}>
+        <PageHeader
+          ghost={false}
+          title={
+            <>
+              <SideDrawer />
+              <span style={{ paddingLeft: "10px" }}>Awsm Forms</span>
+            </>
+          }
+          extra={<CreateModal refresh={setRefresh} />}
+        />
+      </Layout>
+
+      <Layout>
+        <Divider orientation="left">Templates</Divider>
+        <div style={{ padding: 100 }} />
+      </Layout>
+
+      <Layout style={background}>
+        <Divider orientation="left">
+          <h2 style={{ textDecoration: "underline" }}>
+            <>Created Forms</>
+          </h2>
+        </Divider>
+        <Content
+          style={{
+            padding: "50px 50px",
+            backgroundImage: `url("http://localhost:5050/img1.png")`,
+          }}
         >
-          <div className="logo"></div>
-          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-            <Menu.Item key="1" icon={<UserOutlined />}>
-              User
-            </Menu.Item>
-            <Menu.Item key="2" icon={<FileOutlined />}>
-              Forms
-            </Menu.Item>
-            <Menu.Item style={downStyle} key="3" icon={<LogoutOutlined />}>
-              Log out
-            </Menu.Item>
-          </Menu>
-        </Sider>
-        <Layout className="site-layout">
-          <>
-            <PageHeader
-              ghost={false}
-              title={"Hello, user"}
-              extra={[<CreateModal />]}
-            />
-          </>
-          <Divider orientation="left">Created Forms</Divider>
-          <Content style={{ margin: "0 16px" }}>
-            <div className="site-layout-background" style={{ padding: 24 }}>
-              <Row justify="space-between" gutter={[42, 24]}>
-                {APIData.map((item) => (
-                  <Col
-                    key={item}
-                    xs={24}
-                    lg={24 / 4}
-                    className="gutter-row"
-                    span={4}
-                  >
-                    <div style={style}>
-                      <Card hoverable title={item} style={{ cursor: "auto" }}>
-                        <a>{"edit "}</a>
-                        <a>{"view "}</a>
-                        <a>{"response "}</a>
-                      </Card>
-                    </div>
-                  </Col>
-                ))}
-              </Row>
-            </div>
-          </Content>
-          <Footer style={{ textAlign: "center" }}>
-            Lorem ipsum dolor sit.
-          </Footer>
-        </Layout>
+          <div className="site-layout-content">
+            <Row align="middle" justify="flex-start" gutter={[38, 48]}>
+              {APIData.map((item) => (
+                <Col key={item.formId} xs={24} md={12} lg={8} xl={6}>
+                  <>
+                    <FormCard item={item} />
+                  </>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        </Content>
       </Layout>
     </>
   );
 }
-const style = {};
+
+const background = { backgroundColor: "#d5ebff" };
+// image source: https://pixabay.com/vectors/summer-pattern-doodle-drawing-4181783

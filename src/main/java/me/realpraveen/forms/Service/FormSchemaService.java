@@ -26,16 +26,16 @@ import me.realpraveen.forms.Utils.Notification;
 @Slf4j
 public class FormSchemaService {
 
-	FormSchemaRepository formSchemaRepository;
-	ResponseSchemaRepository responseSchemaRepository;
-	SpringDependencyProvider provider;
+	private SpringDependencyProvider provider;
+	private FormSchemaRepository formSchemaRepository;
+	private ResponseSchemaRepository responseSchemaRepository;
 
 	@Autowired
-	public FormSchemaService(FormSchemaRepository formSchemaRepository,
-			ResponseSchemaRepository responseSchemaRepository, SpringDependencyProvider springDependencyProvider) {
+	public FormSchemaService(SpringDependencyProvider provider, FormSchemaRepository formSchemaRepository,
+			ResponseSchemaRepository responseSchemaRepository) {
+		this.provider = provider;
 		this.formSchemaRepository = formSchemaRepository;
 		this.responseSchemaRepository = responseSchemaRepository;
-		provider = springDependencyProvider;
 	}
 
 	public List<FormSchema> findAllForms() {
@@ -49,7 +49,7 @@ public class FormSchemaService {
 	public void insertFormSchema(FormDTO dto) {
 
 		FormSchema form = new FormSchema(LocalDateTime.now().withNano(0));
-
+		// todo: use nested maps in schema to better store responses
 		Map<String, String> initailValue = new HashMap<String, String>();
 
 		initailValue.put("0", "inital question");

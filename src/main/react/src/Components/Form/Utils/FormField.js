@@ -45,8 +45,10 @@ export default function FormField({ style }) {
                   }
                   if (e.key === "k" && e.metaKey) {
                     e.preventDefault();
-                    remove(name);
-                    onDeleteFocus(name - 1);
+                    if (name > 0) {
+                      remove(name);
+                      onDeleteFocus(name - 1);
+                    }
                   }
                 }}
               >

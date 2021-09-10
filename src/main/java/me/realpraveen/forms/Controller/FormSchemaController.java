@@ -34,15 +34,16 @@ public class FormSchemaController {
 
 	@GetMapping
 	public ResponseEntity<List<FormSchema>> findAllFroms() {
-		List<FormSchema> form = formSchemaService.findAllForms();
-		return ResponseEntity.ok(form);
+		return ResponseEntity.ok(formSchemaService.findAllForms());
 	}
 
 	@GetMapping("/{formId}")
 	public ResponseEntity<FormSchema> findById(@PathVariable String formId) {
+
 		FormSchema form = formSchemaService.findById(formId);
 		boolean isNull = Optional.ofNullable(form).isEmpty();
 		return (isNull ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(form));
+
 	}
 
 	@PostMapping

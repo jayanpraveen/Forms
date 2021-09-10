@@ -53,14 +53,13 @@ export default function SiteHeader({ title, subTitle, formId }) {
         }
         extra={[
           <span key="save">
-            <SubmitButton placement="bottom" value={"Save"} />,
+            <SubmitButton placement="bottom" value={"Save"} />
             <Divider type="vertical" />
           </span>,
           <span key="view">
             <Button>
               <Link to={`/form/${formId}/view`}>View</Link>
             </Button>
-
             <Divider type="vertical" />
           </span>,
           <span key="copy">

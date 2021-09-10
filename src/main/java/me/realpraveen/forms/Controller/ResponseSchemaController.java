@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,12 +31,9 @@ public class ResponseSchemaController {
 
 	@GetMapping("/{formId}")
 	public ResponseEntity<ResponseGetDTO> getResponse(@PathVariable String formId) {
-		return ResponseEntity.ok(responseSchemaService.buildResponse(formId));
-	}
-
-	@PostMapping
-	public ResponseEntity<ResponseSchema> insertResponseSchema(@RequestBody ResponseSchema response) {
-		return new ResponseEntity<>(responseSchemaService.insertResponseSchema(response), HttpStatus.CREATED);
+		var dto = responseSchemaService.getResponse(formId);
+		return dto.getNotification().hasErrors() ? new ResponseEntity<>(dto, HttpStatus.NOT_FOUND)
+				: ResponseEntity.ok(dto);
 	}
 
 	@PutMapping("/{formId}")
