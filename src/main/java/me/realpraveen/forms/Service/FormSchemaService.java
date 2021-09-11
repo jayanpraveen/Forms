@@ -98,6 +98,13 @@ public class FormSchemaService {
 
 	}
 
+	public void deleteForm(String formId) {
+		if (doesFormExist(formId)) {
+			formSchemaRepository.deleteById(formId);
+			responseSchemaRepository.deleteById(formId);
+		}
+	}
+
 	public boolean doesFormExist(String formId) {
 		return (formId == null || formId == "" ? false : formSchemaRepository.existsById(formId));
 	}

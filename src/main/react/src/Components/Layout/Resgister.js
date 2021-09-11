@@ -1,18 +1,41 @@
-import { LockOutlined, MailOutlined, SmileOutlined } from "@ant-design/icons";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import React from "react";
+import axios from "axios";
+import {
+  LockOutlined,
+  MailOutlined,
+  SmileOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
 export default function Register() {
-  const onFinish = (values) => {
-    console.log(values);
+  const onFinish = (data) => {
+    console.log(data);
+
+    axios.post(`/register`, data).then(
+      (response) => {
+        message.success("Registration Done!");
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   return (
     <>
       <Form name="reg_form" className="antd-login" onFinish={onFinish}>
-        <Form.Item>
+        <Form.Item name="name">
           <Input
             prefix={<SmileOutlined />}
+            required
+            type="text"
+            placeholder="Name"
+          />
+        </Form.Item>
+        <Form.Item name="username">
+          <Input
+            prefix={<UserOutlined />}
             required
             type="text"
             placeholder="Username"
@@ -44,22 +67,6 @@ export default function Register() {
             prefix={<LockOutlined />}
             type="password"
             placeholder="Password"
-          />
-        </Form.Item>
-        <Form.Item
-          name="confirm_password"
-          rules={[
-            {
-              type: "string",
-              required: true,
-              message: "Please re-enter password",
-            },
-          ]}
-        >
-          <Input
-            prefix={<LockOutlined />}
-            type="password"
-            placeholder="Confirm password"
           />
         </Form.Item>
         <Form.Item>

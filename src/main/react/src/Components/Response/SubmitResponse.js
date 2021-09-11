@@ -1,11 +1,10 @@
-import { Divider, Form, message, Space, Typography, BackTop } from "antd";
+import { BackTop, Divider, Form, message, Space } from "antd";
 import axios from "axios";
 import React from "react";
 import { listStyle } from "../Styles/ComponentStyle";
 import SubmitButton from "../Utils/SubmitButton";
 import TitleField from "../Utils/TitleField";
 import ReponseField from "./Utils/ResponseField";
-const { Text } = Typography;
 
 export default function SubmitResponse({ formId, APIData }) {
   const onFinish = (values) => {
@@ -47,9 +46,7 @@ export default function SubmitResponse({ formId, APIData }) {
           <SubmitButton value={"Submit"} />
         </Space>
       </Form>
-      <Divider>
-        <Text type="secondary">End of Page</Text>
-      </Divider>
+      <Divider style={{ padding: "70px" }} />
     </>
   );
 }

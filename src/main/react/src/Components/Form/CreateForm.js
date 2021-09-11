@@ -1,12 +1,4 @@
-import {
-  Divider,
-  Form,
-  Input,
-  message,
-  Space,
-  BackTop,
-  Typography,
-} from "antd";
+import { BackTop, Divider, Form, Input, message, Space } from "antd";
 import axios from "axios";
 import React from "react";
 import { listStyle } from "../Styles/ComponentStyle";
@@ -15,7 +7,6 @@ import "./css/SiteHeader.css";
 import FormField from "./Utils/FormField";
 import SiteHeader from "./Utils/SiteHeader";
 const { TextArea } = Input;
-const { Text } = Typography;
 
 export default function CreateForm({ formId, initialValues }) {
   const Title = () => {
@@ -102,7 +93,7 @@ export default function CreateForm({ formId, initialValues }) {
           layout="vertical"
         >
           <div className="site-page-wrapper">
-            <SiteHeader formId={formId} title="batman begins" />
+            <SiteHeader formId={formId} title="Awsm Forms" />
           </div>
           <Space style={listStyle} direction="vertical">
             <Divider style={{ margin: "48px" }} />
@@ -114,9 +105,7 @@ export default function CreateForm({ formId, initialValues }) {
             <FormField style={listStyle} />
           </Space>
         </Form>
-        <Divider>
-          <Text type="secondary">End of Page</Text>
-        </Divider>
+        <Divider style={{ padding: "70px" }} />
       </div>
     </>
   );

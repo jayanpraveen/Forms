@@ -45,7 +45,7 @@ export default function FormSchema() {
   }, [url, formId]);
 
   return (
-    <div>
+    <>
       {Loading ? (
         <LoadingButton />
       ) : (
@@ -66,6 +66,6 @@ export default function FormSchema() {
           )}
         </>
       )}
-    </div>
+    </>
   );
 }

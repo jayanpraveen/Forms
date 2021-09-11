@@ -1,10 +1,10 @@
-import { BackTop, Col, Divider, Layout, PageHeader, Row } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./css/Home.css";
 import CreateModal from "./Utils/CreateModal";
 import SideDrawer from "./Utils/Drawer";
 import FormCard from "./Utils/FormCard";
+import { BackTop, Col, Divider, Layout, PageHeader, Row } from "antd";
 const { Content } = Layout;
 
 export default function Home() {
@@ -58,7 +58,7 @@ export default function Home() {
               {APIData.map((item) => (
                 <Col key={item.formId} xs={24} md={12} lg={8} xl={6}>
                   <>
-                    <FormCard item={item} />
+                    <FormCard item={item} setRefresh={setRefresh} />
                   </>
                 </Col>
               ))}
