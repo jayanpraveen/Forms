@@ -1,7 +1,11 @@
 package me.realpraveen.forms.DTO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import me.realpraveen.forms.Utils.Notification;
 
+@JsonInclude(value = Include.NON_EMPTY)
 public abstract class DataTransferObject {
 
 	protected Notification note = new Notification();

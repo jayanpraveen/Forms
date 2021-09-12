@@ -58,7 +58,7 @@ export default function CreateModal({ refresh }) {
 
   const onCreate = (data) => {
     const postData = async () => {
-      await axios.post(`/forms`, data).then(
+      await axios.post(`/form`, data).then(
         () => refresh({}),
         (err) => {
           console.log(err);
