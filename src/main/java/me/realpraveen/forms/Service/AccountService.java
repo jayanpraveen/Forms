@@ -25,29 +25,27 @@ public class AccountService {
 	private UserRepository userRepository;
 	private SpringDependencyProvider provider;
 
+	private final String SESSION_USER_ID = "USER_ID";
+
 	@Autowired
 	public AccountService(UserRepository userRepository, SpringDependencyProvider provider) {
 		this.userRepository = userRepository;
 		this.provider = provider;
 	}
 
-	public boolean doesUserExist(String username) {
-		return userRepository.existsByUsername(username);
-	}
-
 	public void registerUser(UserDTO dto, HttpSession session) {
 
 		Notification note = new Notification();
 		if (doesUserExist(dto.getUsername())) {
-			note.addError("ERROR", "MESSAGE");
+			note.addError("username", provider.getMessageProvider().getMessage("validation.username.taken"));
 			dto.setNotification(note);
 			return;
 		}
 
-		Set<ConstraintViolation<UserDTO>> violoations = provider.getValidator().validate(dto);
-		dto.setNotification(DTOConverter.convertViolations(violoations));
-
 		User user = new User(dto.getName(), dto.getUsername(), dto.getEmail(), dto.getPassword());
+
+		Set<ConstraintViolation<User>> violoations = provider.getValidator().validate(user);
+		dto.setNotification(DTOConverter.convertViolations(violoations));
 
 		if (!dto.getNotification().hasErrors()) {
 			userRepository.save(user);
@@ -57,10 +55,43 @@ public class AccountService {
 
 	public void loginUser(UserLoginDTO dto, HttpSession session) {
 
+		Notification note = new Notification();
+
+		Set<ConstraintViolation<UserLoginDTO>> violations = provider.getValidator().validate(dto);
+
+		if (!violations.isEmpty()) {
+			dto.setNotification(DTOConverter.convertViolations(violations));
+			return;
+		}
+
 		Optional<User> user = userRepository.findByUsername(dto.getUsername());
 
-		// create session
+		if (user.isPresent()) {
+			createSession(user.get(), dto, session);
+			return;
+		}
+
+		note.addError("username", provider.getMessageProvider().getMessage("validation.login.username.invalid"));
+		dto.setNotification(note);
 
 	}
 
+	public void createSession(User user, UserLoginDTO dto, HttpSession session) {
+		// * use hashing
+		if (dto.getPassword().equals(user.getPassword())) {
+			session.setAttribute(SESSION_USER_ID, user.getId());
+			return;
+		}
+		// * abstract errors
+		Notification note = new Notification();
+		note.addError("password", provider.getMessageProvider().getMessage("validation.login.password.invalid"));
+		dto.setNotification(note);
+
+	}
+
+	public boolean doesUserExist(String username) {
+		return userRepository.existsByUsername(username);
+	}
+
+	// destroy session
 }

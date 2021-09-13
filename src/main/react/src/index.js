@@ -6,6 +6,8 @@ import axios from "axios";
 import "./Index.css";
 
 axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.headers.post["Content-Type"] = "application/text";
+axios.defaults.withCredentials = true;
 
 ReactDOM.render(
   <React.StrictMode>

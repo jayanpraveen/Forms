@@ -17,7 +17,7 @@ export default function Register() {
         message.success("Registration Done!");
       },
       (error) => {
-        console.log(error);
+        console.log(error.response);
       }
     );
   };

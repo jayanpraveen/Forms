@@ -12,9 +12,16 @@ export default function Home() {
   const [APIData, setAPIData] = useState([]);
   const url = "/form";
 
+  const username = "admin";
+  const password = "pass";
+
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(url);
+      const result = await axios.get(url, {
+        headers: {
+          authorization: "Basic " + window.btoa(username + ":" + password),
+        },
+      });
       setAPIData(result.data);
     };
     fetchData();
