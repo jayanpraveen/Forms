@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import me.realpraveen.forms.Repository.FormSchemaRepository;
 import me.realpraveen.forms.Repository.ResponseSchemaRepository;
 import me.realpraveen.forms.Utils.DTOConverter;
 import me.realpraveen.forms.Utils.Notification;
+import me.realpraveen.forms.Utils.EncoderUtils;
 
 @Service
 @Slf4j
@@ -46,14 +48,16 @@ public class FormSchemaService {
 		return formSchemaRepository.findById(formId).orElse(null);
 	}
 
-	public void insertFormSchema(FormDTO dto) {
+	public void insertFormSchema(FormDTO dto, HttpSession session) {
 
-		FormSchema form = new FormSchema(LocalDateTime.now().withNano(0));
+		FormSchema form = new FormSchema(LocalDateTime.now().withNano(0), EncoderUtils.generateId());
+
 		// todo: use nested maps in schema to better store responses
 		Map<String, String> initailValue = new HashMap<String, String>();
 
 		initailValue.put("0", "inital question");
 
+		form.setUserId((String) session.getAttribute("USER_ID"));
 		form.setQuestions(initailValue);
 		form.setTitle(dto.getTitle());
 		form.setAbout(dto.getAbout());

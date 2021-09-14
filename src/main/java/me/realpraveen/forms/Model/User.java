@@ -9,8 +9,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import me.realpraveen.forms.Utils.EncoderUtils;
 
 @Getter
 @Setter
@@ -32,6 +34,7 @@ public class User {
 
 	@NotBlank(message = "{validation.password.empty}")
 	@Size(min = 4, max = 16, message = "{validation.password.size}")
+	@Setter(value = AccessLevel.PRIVATE)
 	private String password;
 
 	@Email
@@ -43,9 +46,9 @@ public class User {
 	public User(String name, String username, String email, String password) {
 		this.name = name;
 		this.username = username;
-		this.password = password;
 		this.email = email;
-		this.name = name;
+		this.password = password;
+		this.hashedPassword = (password != null ? EncoderUtils.hashPassword(password) : null);
 	}
 
 }

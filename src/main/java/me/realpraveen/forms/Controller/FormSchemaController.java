@@ -3,6 +3,8 @@ package me.realpraveen.forms.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +41,7 @@ public class FormSchemaController {
 	}
 
 	@GetMapping("/{formId}")
-	public ResponseEntity<FormSchema> findById(@PathVariable String formId) {
+	public ResponseEntity<FormSchema> findById(@PathVariable String formId, HttpSession session) {
 
 		FormSchema form = formSchemaService.findById(formId);
 		boolean isNull = Optional.ofNullable(form).isEmpty();
@@ -48,9 +50,9 @@ public class FormSchemaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Notification> insertFormSchema(@RequestBody FormDTO form) {
+	public ResponseEntity<Notification> insertFormSchema(@RequestBody FormDTO form, HttpSession session) {
 
-		formSchemaService.insertFormSchema(form);
+		formSchemaService.insertFormSchema(form, session);
 		var note = form.getNotification();
 
 		return (note.hasErrors() ? new ResponseEntity<>(note, HttpStatus.BAD_REQUEST)
@@ -59,7 +61,8 @@ public class FormSchemaController {
 	}
 
 	@PutMapping("/{formId}")
-	public ResponseEntity<Notification> updateFormSchema(@PathVariable String formId, @RequestBody FormDTO form) {
+	public ResponseEntity<Notification> updateFormSchema(@PathVariable String formId, @RequestBody FormDTO form,
+			HttpSession session) {
 
 		formSchemaService.updateFormSchema(formId, form);
 		var note = form.getNotification();

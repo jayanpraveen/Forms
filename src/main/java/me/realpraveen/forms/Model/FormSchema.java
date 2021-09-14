@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -29,11 +30,11 @@ public class FormSchema {
 
 	@Id
 	@Indexed
-	@Setter(value = AccessLevel.PROTECTED)
+	@Setter(value = AccessLevel.PRIVATE)
 	private String formId;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy @ HH:mm")
-	@Setter(value = AccessLevel.PROTECTED)
+	@Setter(value = AccessLevel.PRIVATE)
 	private LocalDateTime createdDateTime;
 
 	@NotBlank(message = "{validation.title.empty}")
@@ -43,7 +44,12 @@ public class FormSchema {
 	@NotEmpty(message = "{validation.question.empty}")
 	private Map<String, String> questions;
 
-	public FormSchema(LocalDateTime createdDateTime) {
+	@NotNull
+	public String userId;
+
+	public FormSchema(LocalDateTime createdDateTime, String formId) {
 		this.createdDateTime = createdDateTime;
+		this.formId = formId;
 	}
+
 }

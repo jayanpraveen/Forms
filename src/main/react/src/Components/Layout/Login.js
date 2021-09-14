@@ -1,44 +1,33 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input, notification } from "antd";
+import { Redirect } from "react-router-dom";
 import React from "react";
 import axios from "axios";
 
 export default function Login() {
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState({ username: "", password: "" });
+  const [loggiedIn, isLoggedIn] = React.useState(false);
+
   const onFinish = (data) => {
+    setLoading(true);
     axios
       .post(`/login`, data)
-      .then(message.success("Login success"), (error) => {
-        console.log(error.response);
-      });
-
-    // const username = "admin";
-    // const password = "pass";
-
-    // axios({
-    //   method: "post",
-    //   url: "/login",
-    //   params: {
-    //     username: "admin",
-    //     password: "pass",
-    //   },
-    //   config: {
-    //     // headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    //     headers: {
-    //       authorization: "Basic " + window.btoa(username + ":" + password),
-    //     },
-    //   },
-    // })
-    //   .then((data) => console.log(data))
-    //   .catch((error) => {
-    //     console.log(error);
-    //     // console.log(error.response);
-    //     // var errResp = error.response;
-    //     // if (errResp.status === 401) {
-    //     //   //Ex: show login page again...
-    //     // }
-    //   });
+      .then(
+        (result) => {
+          setLoading(false);
+          if (result.status === 200) {
+            isLoggedIn(true);
+          }
+        },
+        (error) => {
+          setError(error.response.data);
+        }
+      )
+      .finally(setLoading(false));
   };
 
+  if (loggiedIn) return <Redirect to="/home" />;
   return (
     <>
       <Form name="login_form" className="antd-login" onFinish={onFinish}>
@@ -81,6 +70,12 @@ export default function Login() {
             Log in
           </Button>
         </Form.Item>
+        <>
+          <div style={{ color: "#DC143C" }}>
+            {error.username}
+            {error.password}
+          </div>
+        </>
       </Form>
     </>
   );

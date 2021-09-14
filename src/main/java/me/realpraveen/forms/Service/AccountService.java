@@ -16,6 +16,7 @@ import me.realpraveen.forms.Model.User;
 import me.realpraveen.forms.Provider.SpringDependencyProvider;
 import me.realpraveen.forms.Repository.UserRepository;
 import me.realpraveen.forms.Utils.DTOConverter;
+import me.realpraveen.forms.Utils.EncoderUtils;
 import me.realpraveen.forms.Utils.Notification;
 
 @Service
@@ -77,13 +78,13 @@ public class AccountService {
 	}
 
 	public void createSession(User user, UserLoginDTO dto, HttpSession session) {
-		// * use hashing
-		if (dto.getPassword().equals(user.getPassword())) {
+		Notification note = new Notification();
+
+		if (EncoderUtils.matchPassword(dto.getPassword(), user.getHashedPassword())) {
 			session.setAttribute(SESSION_USER_ID, user.getId());
 			return;
 		}
-		// * abstract errors
-		Notification note = new Notification();
+
 		note.addError("password", provider.getMessageProvider().getMessage("validation.login.password.invalid"));
 		dto.setNotification(note);
 
