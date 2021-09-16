@@ -36,16 +36,37 @@ public class FormSchemaController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<FormSchema>> findAllFroms() {
-		return ResponseEntity.ok(formSchemaService.findAllForms());
+	public ResponseEntity<List<FormSchema>> findAllFroms(HttpSession session) {
+
+		String userId = (String) session.getAttribute("USER_ID");
+
+		List<FormSchema> formList = formSchemaService.findAllFormsForUser(userId);
+		if (formList != null) {
+			return ResponseEntity.ok(formList);
+		}
+
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@GetMapping("/{formId}")
-	public ResponseEntity<FormSchema> findById(@PathVariable String formId, HttpSession session) {
+	@GetMapping("/{formId}/view")
+	public ResponseEntity<FormSchema> findById(@PathVariable String formId) {
 
 		FormSchema form = formSchemaService.findById(formId);
 		boolean isNull = Optional.ofNullable(form).isEmpty();
 		return (isNull ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : ResponseEntity.ok(form));
+
+	}
+
+	@GetMapping("/{formId}/edit")
+	public ResponseEntity<FormSchema> editForm(@PathVariable String formId, HttpSession session) {
+
+		if (!formSchemaService.doesFormExist(formId)) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		FormSchema form = formSchemaService.editForm(formId, session);
+		boolean isNull = Optional.ofNullable(form).isEmpty();
+		return (isNull ? new ResponseEntity<>(HttpStatus.FORBIDDEN) : ResponseEntity.ok(form));
 
 	}
 
@@ -64,6 +85,9 @@ public class FormSchemaController {
 	public ResponseEntity<Notification> updateFormSchema(@PathVariable String formId, @RequestBody FormDTO form,
 			HttpSession session) {
 
+		if (!(formSchemaService.findById(formId).getUserId().equals((String) session.getAttribute("USER_ID"))))
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
 		formSchemaService.updateFormSchema(formId, form);
 		var note = form.getNotification();
 
@@ -73,7 +97,7 @@ public class FormSchemaController {
 	}
 
 	@DeleteMapping("/{formId}")
-	public ResponseEntity<String> deleteForm(@PathVariable String formId) {
+	public ResponseEntity<String> deleteForm(@PathVariable String formId, HttpSession session) {
 		formSchemaService.deleteForm(formId);
 		return new ResponseEntity<>("Deleted", HttpStatus.OK);
 	}

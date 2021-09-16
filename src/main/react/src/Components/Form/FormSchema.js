@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CreateForm from "./CreateForm";
 import LoadingButton from "../Utils/LoadingButton";
-import { Result, Button } from "antd";
 import { useParams } from "react-router";
+import ErrorPage from "../Utils/ErrorPage";
 
 export default function FormSchema() {
   const { formId } = useParams();
@@ -16,7 +16,7 @@ export default function FormSchema() {
     questions: [],
   });
 
-  const url = `/form/${formId}`;
+  const url = `/form/${formId}/edit`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,16 +51,7 @@ export default function FormSchema() {
       ) : (
         <>
           {error ? (
-            <Result
-              status={error}
-              title={error}
-              subTitle="Sorry, the page you visited does not exist."
-              extra={
-                <Button type="primary" href="/">
-                  Back Home
-                </Button>
-              }
-            />
+            <ErrorPage error={error} />
           ) : (
             <CreateForm initialValues={initialValues} formId={formId} />
           )}

@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.realpraveen.forms.DTO.User.UserDTO;
 import me.realpraveen.forms.DTO.User.UserLoginDTO;
 import me.realpraveen.forms.Service.AccountService;
+import me.realpraveen.forms.Utils.Notification;
 
 @Slf4j
 @RestController
@@ -25,7 +26,7 @@ public class AccountController {
 	private AccountService accountService;
 
 	@PostMapping("/login")
-	public ResponseEntity<?> loginUser(@RequestBody UserLoginDTO user, HttpSession session) {
+	public ResponseEntity<Notification> loginUser(@RequestBody UserLoginDTO user, HttpSession session) {
 
 		accountService.loginUser(user, session);
 
@@ -37,7 +38,7 @@ public class AccountController {
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@RequestBody UserDTO user, HttpSession session) {
+	public ResponseEntity<Notification> registerUser(@RequestBody UserDTO user, HttpSession session) {
 
 		accountService.registerUser(user, session);
 		if (user.getNotification().hasErrors()) {
@@ -46,6 +47,13 @@ public class AccountController {
 
 		return new ResponseEntity<>(HttpStatus.OK);
 
+	}
+
+	@GetMapping("/logoutd")
+	public void logoutUser(HttpSession session) {
+		if (session != null) {
+			session.invalidate();
+		}
 	}
 
 }

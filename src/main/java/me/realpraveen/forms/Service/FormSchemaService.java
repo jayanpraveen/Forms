@@ -40,12 +40,21 @@ public class FormSchemaService {
 		this.responseSchemaRepository = responseSchemaRepository;
 	}
 
-	public List<FormSchema> findAllForms() {
-		return formSchemaRepository.findAll();
+	public List<FormSchema> findAllFormsForUser(String userId) {
+		return formSchemaRepository.findByUserId(userId);
 	}
 
 	public FormSchema findById(String formId) {
 		return formSchemaRepository.findById(formId).orElse(null);
+	}
+
+	public FormSchema editForm(String formId, HttpSession session) {
+		String userId = (String) session.getAttribute("USER_ID");
+		FormSchema form = formSchemaRepository.findById(formId).orElse(null);
+		if (form.getUserId().equals(userId)) {
+			return form;
+		}
+		return null;
 	}
 
 	public void insertFormSchema(FormDTO dto, HttpSession session) {

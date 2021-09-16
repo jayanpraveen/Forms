@@ -4,7 +4,7 @@ import "./css/Home.css";
 import CreateModal from "./Utils/CreateModal";
 import SideDrawer from "./Utils/Drawer";
 import FormCard from "./Utils/FormCard";
-import { BackTop, Col, Divider, Layout, PageHeader, Row } from "antd";
+import { BackTop, Button, Col, Divider, Layout, PageHeader, Row } from "antd";
 const { Content } = Layout;
 
 export default function Home() {
@@ -27,6 +27,14 @@ export default function Home() {
     fetchData();
   }, [url, refresh]);
 
+  async function logout() {
+    const res = await axios
+      .get("http://localhost:8080/logoutd")
+      .then((data) => data)
+      .catch((err) => console.log(err));
+    console.log(res);
+  }
+
   return (
     <>
       <BackTop />
@@ -39,7 +47,14 @@ export default function Home() {
               <span style={{ paddingLeft: "10px" }}>Awsm Forms</span>
             </>
           }
-          extra={<CreateModal refresh={setRefresh} />}
+          extra={
+            <>
+              <Button type="primary" onClick={logout}>
+                Log out
+              </Button>
+              <CreateModal refresh={setRefresh} />
+            </>
+          }
         />
       </Layout>
 
@@ -78,4 +93,3 @@ export default function Home() {
 }
 
 const background = { backgroundColor: "#d5ebff" };
-// image source: https://pixabay.com/vectors/summer-pattern-doodle-drawing-4181783
