@@ -6,6 +6,7 @@ import TitleField from "../Utils/TitleField";
 import "./css/SiteHeader.css";
 import FormField from "./Utils/FormField";
 import SiteHeader from "./Utils/SiteHeader";
+import { Link } from "react-router-dom";
 const { TextArea } = Input;
 
 export default function CreateForm({ formId, initialValues }) {
@@ -93,7 +94,10 @@ export default function CreateForm({ formId, initialValues }) {
           layout="vertical"
         >
           <div className="site-page-wrapper">
-            <SiteHeader formId={formId} title="Awsm Forms" />
+            <SiteHeader
+              formId={formId}
+              title={<Link to="/home">Awsm Forms</Link>}
+            />
           </div>
           <Space style={listStyle} direction="vertical">
             <Divider style={{ margin: "48px" }} />

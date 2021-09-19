@@ -9,6 +9,8 @@ import {
 } from "@ant-design/icons";
 
 export default function Register() {
+  const [errors, setErrors] = React.useState({});
+
   const onFinish = (data) => {
     console.log(data);
 
@@ -17,7 +19,7 @@ export default function Register() {
         message.success("Registration Done!");
       },
       (error) => {
-        console.log(error.response);
+        setErrors(error.response.data);
       }
     );
   };
@@ -75,6 +77,11 @@ export default function Register() {
           </Button>
         </Form.Item>
       </Form>
+      <div style={{ color: "#DC143C" }}>
+        {Object.entries(errors).map(([key, value]) => (
+          <p key={key}>{value}</p>
+        ))}
+      </div>
     </>
   );
 }

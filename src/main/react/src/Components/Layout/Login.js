@@ -1,5 +1,5 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form, Input, notification } from "antd";
+import { Button, Form, Input } from "antd";
 import { Redirect } from "react-router-dom";
 import React from "react";
 import axios from "axios";

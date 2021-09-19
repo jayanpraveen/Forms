@@ -1,9 +1,26 @@
 import { MenuOutlined } from "@ant-design/icons";
-import { Button, Drawer } from "antd";
+import { Button, Divider, Drawer } from "antd";
+import { Link } from "react-router-dom";
 import React from "react";
+import axios from "axios";
 
 function SideDrawer() {
   const [visible, setVisible] = React.useState(false);
+
+  const ButtonStyle = {
+    marginLeft: "-24px",
+    height: "40px",
+    width: "100%",
+    position: "absolute",
+    bottom: "0",
+  };
+
+  async function handleLogout() {
+    await axios
+      .get("http://localhost:8080/logoutd")
+      .then(() => {})
+      .catch((err) => console.log(err));
+  }
 
   return (
     <>
@@ -13,13 +30,18 @@ function SideDrawer() {
         icon={<MenuOutlined />}
       />
       <Drawer
-        title="Basic Drawer"
+        title="User details"
+        width={500}
         placement={"right"}
-        closable={true}
         onClose={() => setVisible(false)}
         visible={visible}
+        extra={"SD"}
       >
-        <p>Lorem ipsum dolor sit amet.</p>
+        <p>User info</p>
+        <Divider />
+        <Button style={ButtonStyle} type="primary" onClick={handleLogout}>
+          <Link to="/"> Log out </Link>
+        </Button>
       </Drawer>
     </>
   );

@@ -4,7 +4,8 @@ import "./css/Home.css";
 import CreateModal from "./Utils/CreateModal";
 import SideDrawer from "./Utils/Drawer";
 import FormCard from "./Utils/FormCard";
-import { BackTop, Button, Col, Divider, Layout, PageHeader, Row } from "antd";
+import { BackTop, Col, Divider, Layout, PageHeader, Row } from "antd";
+import { Link } from "react-router-dom";
 const { Content } = Layout;
 
 export default function Home() {
@@ -12,28 +13,13 @@ export default function Home() {
   const [APIData, setAPIData] = useState([]);
   const url = "/form";
 
-  const username = "admin";
-  const password = "pass";
-
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(url, {
-        headers: {
-          authorization: "Basic " + window.btoa(username + ":" + password),
-        },
-      });
+      const result = await axios.get(url);
       setAPIData(result.data);
     };
     fetchData();
   }, [url, refresh]);
-
-  async function logout() {
-    const res = await axios
-      .get("http://localhost:8080/logoutd")
-      .then((data) => data)
-      .catch((err) => console.log(err));
-    console.log(res);
-  }
 
   return (
     <>
@@ -44,14 +30,13 @@ export default function Home() {
           title={
             <>
               <SideDrawer />
-              <span style={{ paddingLeft: "10px" }}>Awsm Forms</span>
+              <span style={{ paddingLeft: "10px" }}>
+                <Link to="/home">Awsm Forms</Link>
+              </span>
             </>
           }
           extra={
             <>
-              <Button type="primary" onClick={logout}>
-                Log out
-              </Button>
               <CreateModal refresh={setRefresh} />
             </>
           }
@@ -69,12 +54,7 @@ export default function Home() {
             <>Created Forms</>
           </h2>
         </Divider>
-        <Content
-          style={{
-            padding: "50px 50px",
-            backgroundImage: `url("http://localhost:5050/img1.png")`,
-          }}
-        >
+        <Content style={{ padding: "50px 50px" }}>
           <div className="site-layout-content">
             <Row align="middle" justify="flex-start" gutter={[38, 48]}>
               {APIData.map((item) => (

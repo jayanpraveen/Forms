@@ -94,5 +94,4 @@ public class AccountService {
 		return userRepository.existsByUsername(username);
 	}
 
-	// destroy session
 }
