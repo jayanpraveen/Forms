@@ -34,7 +34,7 @@ public class User {
 
 	@Indexed
 	@NotBlank(message = "{validaiton.username.empty}")
-	@Size(min = 4, max = 12, message = "{validation.username.size}")
+	@Size(min = 4, max = 24, message = "{validation.username.size}")
 	@Pattern(regexp = "^[a-zA-Z]+([_-]?[a-zA-Z0-9_])*$", message = "{validation.username.invalid}")
 	private String username;
 

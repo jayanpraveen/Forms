@@ -1,11 +1,14 @@
-import { MenuOutlined } from "@ant-design/icons";
-import { Button, Divider, Drawer } from "antd";
-import { Link } from "react-router-dom";
-import React from "react";
 import axios from "axios";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { MenuOutlined } from "@ant-design/icons";
+import Profile from "./Profile";
+import { Button, Divider, Drawer, message, Typography } from "antd";
+const { Title } = Typography;
 
 function SideDrawer() {
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
+  const [userDetails, setUserDetails] = useState({ username: "" });
 
   const ButtonStyle = {
     marginLeft: "-24px",
@@ -18,9 +21,19 @@ function SideDrawer() {
   async function handleLogout() {
     await axios
       .get("http://localhost:8080/logoutd")
-      .then(() => {})
+      .then(() => {
+        message.success("Logged out");
+      })
       .catch((err) => console.log(err));
   }
+
+  React.useEffect(() => {
+    async function getUserDeatils() {
+      const result = await axios.get("user/details");
+      setUserDetails(result.data);
+    }
+    getUserDeatils();
+  }, []);
 
   return (
     <>
@@ -30,14 +43,14 @@ function SideDrawer() {
         icon={<MenuOutlined />}
       />
       <Drawer
-        title="User details"
+        title={<Title level={2}>Profile:</Title>}
         width={500}
         placement={"right"}
         onClose={() => setVisible(false)}
         visible={visible}
-        extra={"SD"}
       >
-        <p>User info</p>
+        <Profile userDetails={userDetails} />
+
         <Divider />
         <Button style={ButtonStyle} type="primary" onClick={handleLogout}>
           <Link to="/"> Log out </Link>
