@@ -4,7 +4,7 @@ Create forms, record responses.
 
 ## Overview
 
-![home](./assets/imgs/img_1.png)
+![home](./assets/overview.png)
 Note: This project is in development
 
 ---
