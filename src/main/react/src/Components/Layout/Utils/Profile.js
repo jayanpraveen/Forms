@@ -17,7 +17,7 @@ function Profile({ userDetails }) {
     <div>
       <Avatar
         draggable={false}
-        src={`https://avatars.dicebear.com/api/personas/${str}slcdvrspoks.svg`}
+        src={`https://avatars.dicebear.com/api/personas/${str}.svg`}
         style={{ backgroundColor: "#f0f8ff" }}
         size={size}
       ></Avatar>
