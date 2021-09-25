@@ -64,7 +64,7 @@ public class FormSchemaService {
 		// todo: use nested maps in schema to better store responses
 		Map<String, String> initailValue = new HashMap<String, String>();
 
-		initailValue.put("0", "inital question");
+		initailValue.put("0", "untitled question");
 
 		form.setUserId((String) session.getAttribute("USER_ID"));
 		form.setQuestions(initailValue);

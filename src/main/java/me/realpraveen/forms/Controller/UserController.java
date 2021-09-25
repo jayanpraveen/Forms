@@ -13,7 +13,7 @@ import me.realpraveen.forms.DTO.User.UserDetailsDTO;
 import me.realpraveen.forms.Service.UserService;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/api/user")
 public class UserController {
 
 	@Autowired

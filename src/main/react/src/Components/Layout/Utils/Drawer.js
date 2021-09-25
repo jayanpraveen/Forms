@@ -20,7 +20,7 @@ function SideDrawer() {
 
   async function handleLogout() {
     await axios
-      .get("http://localhost:8080/logoutd")
+      .get("/logoutd")
       .then(() => {
         message.success("Logged out");
       })

@@ -17,7 +17,7 @@ import me.realpraveen.forms.Model.ResponseSchema;
 import me.realpraveen.forms.Service.ResponseSchemaService;
 
 @RestController
-@RequestMapping(value = "/res")
+@RequestMapping(value = "/api/res")
 public class ResponseSchemaController {
 
 	ResponseSchemaService responseSchemaService;

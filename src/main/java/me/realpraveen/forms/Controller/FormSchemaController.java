@@ -23,7 +23,7 @@ import me.realpraveen.forms.Service.FormSchemaService;
 import me.realpraveen.forms.Utils.Notification;
 
 @RestController
-@RequestMapping("/form")
+@RequestMapping("/api/form")
 public class FormSchemaController {
 
 	FormSchemaService formSchemaService;
