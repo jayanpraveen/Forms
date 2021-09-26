@@ -8,7 +8,8 @@ const { Text } = Typography;
 
 export default function SiteHeader({ title, subTitle, formId }) {
   // * replace localhost with axios.defaults.baseURL in production.
-  const link = `localhost:3000/form/${formId}/view`;
+  // * const link = `${axios.defaults.baseURL}/form/${formId}/view`;
+  const link = `${window.location.origin}/form/${formId}/view`;
 
   function info() {
     Modal.info({
