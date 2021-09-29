@@ -9,7 +9,6 @@ import javax.validation.ConstraintViolation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
 import me.realpraveen.forms.DTO.User.UserDTO;
 import me.realpraveen.forms.DTO.User.UserLoginDTO;
 import me.realpraveen.forms.Model.User;
@@ -20,7 +19,6 @@ import me.realpraveen.forms.Utils.EncoderUtils;
 import me.realpraveen.forms.Utils.Notification;
 
 @Service
-@Slf4j
 public class AccountService {
 
 	private UserRepository userRepository;
@@ -34,7 +32,7 @@ public class AccountService {
 		this.provider = provider;
 	}
 
-	public void registerUser(UserDTO dto, HttpSession session) {
+	public void registerUser(UserDTO dto) {
 
 		Notification note = new Notification();
 		if (doesUserExist(dto.getUsername())) {

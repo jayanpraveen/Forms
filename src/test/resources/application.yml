@@ -1,0 +1,18 @@
+---
+spring:
+  application:
+    name: TEST
+  data:
+    mongodb:
+      uri: "mongodb://${MONGO_HOST:localhost}:${MONGO_PORT:27017}/${spring.application.name}"
+  output:
+    ansi:
+      enabled: ALWAYS
+  profiles:
+    active: local
+  security:
+    user:
+      name: admin
+      password: admin
+  session:
+    store-type: mongodb

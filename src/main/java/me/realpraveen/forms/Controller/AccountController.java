@@ -20,8 +20,12 @@ import me.realpraveen.forms.Utils.Notification;
 @RequestMapping("/api")
 public class AccountController {
 
-	@Autowired
 	private AccountService accountService;
+
+	@Autowired
+	public AccountController(AccountService accountService) {
+		this.accountService = accountService;
+	}
 
 	@PostMapping("/login")
 	public ResponseEntity<Notification> loginUser(@RequestBody UserLoginDTO user, HttpSession session) {
@@ -38,7 +42,7 @@ public class AccountController {
 	@PostMapping("/register")
 	public ResponseEntity<Notification> registerUser(@RequestBody UserDTO user, HttpSession session) {
 
-		accountService.registerUser(user, session);
+		accountService.registerUser(user);
 		if (user.getNotification().hasErrors()) {
 			return new ResponseEntity<>(user.getNotification(), HttpStatus.BAD_REQUEST);
 		}

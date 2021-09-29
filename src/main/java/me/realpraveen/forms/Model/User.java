@@ -44,7 +44,7 @@ public class User {
 	@Setter(value = AccessLevel.PRIVATE)
 	private String password;
 
-	@Email
+	@Email(message = "{validation.email.invalid}")
 	@NotEmpty(message = "{validation.email.empty}")
 	private String email;
 

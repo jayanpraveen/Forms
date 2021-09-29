@@ -9,18 +9,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.realpraveen.forms.DTO.User.UserDetailsDTO;
 import me.realpraveen.forms.Service.UserService;
 
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserController {
 
-	@Autowired
 	private UserService userService;
 
+	@Autowired
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
+
 	@GetMapping("/details")
-	public ResponseEntity<UserDetailsDTO> getUserDetails(HttpSession session) {
+	public ResponseEntity<?> getUserDetails(HttpSession session) {
 
 		String userId = (String) session.getAttribute("USER_ID");
 		var user = userService.getUserDetails(userId);
