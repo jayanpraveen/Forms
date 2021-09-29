@@ -2,10 +2,12 @@
 
 Create forms, record responses.
 
+![tests](https://github.com/jayanpraveen/Forms/actions/workflows/maven.yml/badge.svg)  
+
 ## Overview
 
 ![home](./assets/overview.png)
-Note: This project is in development
+Note: This application is in development
 
 ---
 
