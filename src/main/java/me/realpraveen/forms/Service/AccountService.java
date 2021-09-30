@@ -35,16 +35,16 @@ public class AccountService {
 	public void registerUser(UserDTO dto) {
 
 		Notification note = new Notification();
+
+		User user = new User(dto.getName(), dto.getUsername(), dto.getEmail(), dto.getPassword());
+		Set<ConstraintViolation<User>> violoations = provider.getValidator().validate(user);
+		dto.setNotification(DTOConverter.convertViolations(violoations));
+
 		if (doesUserExist(dto.getUsername())) {
 			note.addError("username", provider.getMessageProvider().getMessage("validation.username.taken"));
 			dto.setNotification(note);
 			return;
 		}
-
-		User user = new User(dto.getName(), dto.getUsername(), dto.getEmail(), dto.getPassword());
-
-		Set<ConstraintViolation<User>> violoations = provider.getValidator().validate(user);
-		dto.setNotification(DTOConverter.convertViolations(violoations));
 
 		if (!dto.getNotification().hasErrors()) {
 			userRepository.save(user);
