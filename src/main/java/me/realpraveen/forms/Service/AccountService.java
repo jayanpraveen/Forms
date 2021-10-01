@@ -47,7 +47,7 @@ public class AccountService {
 		}
 
 		if (!dto.getNotification().hasErrors()) {
-			userRepository.save(user);
+			userRepository.insert(user);
 		}
 
 	}
