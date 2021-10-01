@@ -57,10 +57,10 @@ public class AccountServiceTest {
 	void registerSuccess() {
 		UserDTO dto = new UserDTO("Tom", "tommy_tsunami", "trex@domain.com", "tomspassword");
 
-		when(repository.save(any(User.class))).thenReturn(null);
+		when(repository.insert(any(User.class))).thenReturn(null);
 
 		accountService.registerUser(dto);
-		verify(repository, times(1)).save(any(User.class));
+		verify(repository, times(1)).insert(any(User.class));
 		assertFalse(dto.getNotification().hasErrors());
 	}
 
