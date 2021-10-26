@@ -10,7 +10,7 @@ import javax.validation.Validator;
 
 import org.junit.jupiter.api.Test;
 
-public class UseTest {
+public class UserTest {
 	Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
 	@Test
