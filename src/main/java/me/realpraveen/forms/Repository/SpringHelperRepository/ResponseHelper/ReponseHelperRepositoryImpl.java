@@ -21,7 +21,7 @@ public class ReponseHelperRepositoryImpl implements ReponseHelperRepository {
 		this.mongoTemplate = mongoTemplate;
 	}
 
-	public UpdateResult pushResponse(String formId, ResponseSchema response) {
+	public UpdateResult addResponse(String formId, ResponseSchema response) {
 
 		Update update = new Update();
 		update.push("response", response.getResponse().get(0));

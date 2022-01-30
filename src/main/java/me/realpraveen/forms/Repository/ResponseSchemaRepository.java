@@ -15,6 +15,6 @@ public interface ResponseSchemaRepository extends MongoRepository<ResponseSchema
 
 	List<ResponseSchema> findByFormId(String formId);
 
-	UpdateResult pushResponse(String formId, ResponseSchema response);
+	UpdateResult addResponse(String formId, ResponseSchema response);
 
 }

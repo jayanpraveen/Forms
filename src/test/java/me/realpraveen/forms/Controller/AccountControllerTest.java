@@ -25,7 +25,7 @@ import me.realpraveen.forms.Service.AccountService;
 
 @WebMvcTest(AccountController.class)
 @ExtendWith(SpringExtension.class)
-public class AccountControllerIT {
+public class AccountControllerTest {
 
 	@Autowired
 	MockMvc mockMvc;

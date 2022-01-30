@@ -5,5 +5,5 @@ import com.mongodb.client.result.UpdateResult;
 import me.realpraveen.forms.Model.ResponseSchema;
 
 public interface ReponseHelperRepository {
-	UpdateResult pushResponse(String formId, ResponseSchema repsonse);
+	UpdateResult addResponse(String formId, ResponseSchema repsonse);
 }

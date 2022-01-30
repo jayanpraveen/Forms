@@ -30,13 +30,13 @@ public class ResponseSchemaService {
 		this.helper = helper;
 	}
 
-	public UpdateResult pushResponse(String formId, ResponseSchema response) {
+	public UpdateResult addResponse(String formId, ResponseSchema response) {
 
 		if (doesResponseExist(formId)) {
 			log.error(provider.getMessageProvider().getMessage("response.not_exist"));
 		}
 
-		return responseRepository.pushResponse(formId, response);
+		return responseRepository.addResponse(formId, response);
 
 	}
 

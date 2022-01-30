@@ -37,7 +37,7 @@ public class ResponseSchemaController {
 	@PutMapping("/{formId}")
 	public ResponseEntity<UpdateResult> pushResponse(@PathVariable String formId,
 			@RequestBody ResponseSchema response) {
-		return ResponseEntity.ok(responseSchemaService.pushResponse(formId, response));
+		return ResponseEntity.ok(responseSchemaService.addResponse(formId, response));
 	}
 
 }

@@ -1,25 +1,41 @@
-# Forms
+<div align="center">
+	<h1>Forms</h1>
+	<p>Create forms, record responses.</p>
 
-Create forms, record responses.
+![tests](https://github.com/jayanpraveen/Forms/actions/workflows/maven.yml/badge.svg)
 
-![tests](https://github.com/jayanpraveen/Forms/actions/workflows/maven.yml/badge.svg)  
+<img src="./assets/overview.png" alt="tildly" width="940">
 
-## Overview
-
-![home](./assets/overview.png)
-Note: This application is in development
+</div>
 
 ---
 
-## Build instructions
+## Development
 
-### Clone the repository:
+Start Spring-boot:
+
+```sh
+./mvnw spring-boot:run
+```
+
+Start [react](https://github.com/jayanpraveen/Forms/tree/main/src/main/react):
+
+```sh
+yarn start
+```
+
+> react starts at port `3000`,\
+> spring-boot starts at port `8723`.
+
+## Build
+
+Clone the repository:
 
 ```sh
 git clone https://github.com/jayanpraveen/forms.git
 ```
 
-### Build using maven:
+Build using maven:
 
 ```sh
 mvn clean install
@@ -27,10 +43,4 @@ mvn clean install
 
 ---
 
-For using the development server, go to [./src/main/react](https://github.com/jayanpraveen/Forms/tree/main/src/main/react) and start the server using:
-
-```sh
-yarn start
-```
-
-> This will start server at port 3000, you will also need to run the Spring boot application.
+> The application starts at port `8723`.
